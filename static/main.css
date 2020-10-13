@@ -20,20 +20,24 @@ body {
 }
 
 #menu {
-    background-color:antiquewhite;
-    text-align: center;
+    background-color:none;
     box-shadow: 0 6px 8px rgba(0,0,0,0.25);
-    width: 50%;
+    width: 100%;
     list-style:none;
     padding: 0;
+    height: auto;
+    flex-wrap: wrap;
 }
 
 #menu li{
-    padding: 2vh 3vw;
+    width: auto;
+    text-align: center;
+    background-color: antiquewhite;
+    padding: 1vh 1vw;
     box-shadow: 0 6px 8px rgba(0,0,0,0.25);
-    width: 100%;
     font-family: Verdana;
-    font-size: 2vh;
+    font-size: 1.5vh;
     letter-spacing: 3px;
     font-weight: 600;
+    margin: 1vh 1vw;
 }

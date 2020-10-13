@@ -16,21 +16,49 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg mx-3 my-3" id="navbar">
-<a class="navbar-brand" href="#">LOGO</a>
-<button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-</button>
-<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-    <div class="navbar-nav ml-auto">
-    <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-    <a class="nav-link" href="#">Features</a>
-    <a class="nav-link" href="#">Pricing</a>
-    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+    <nav class="navbar navbar-expand-lg mx-3 my-3" id="navbar">
+    <a class="navbar-brand" href="#">LOGO</a>
+    <button class="navbar-toggler navbar-light" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav ml-auto">
+        <a class="nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#">Features</a>
+        <a class="nav-link" href="#">Pricing</a>
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </div>
     </div>
-</div>
-</nav>
+    </nav>
 
+    <section>
+        <div class="container" id="searchBar">
+            <span id="searchLabel">Famous Book Titles</span><br/>
+            <input class="form-control" id="search" type="text" placeholder="Search for book...">
+            <ul class="d-flex flex-column justify-content-center align-items-center mx-auto" id="menu">
+                <!-- <li><a href="#">Dungeon and Dragons</a></li>
+                <li><a href="#">Call of Cthulhu</a></li>
+                <li><a href="#">Blades in the Dark</a></li>
+                <li><a href="#">Warhammer Fantasy</a></li>
+                <li><a href="#">Deadlands</a></li>
+                <li><a href="#">Cyberpunk</a></li>
+                <li><a href="#">Paranoia</a></li>
+                <li><a href="#">Shadow of the Demon Lord</a></li>
+                <li><a href="#">Legend of the Five Rings</a></li>
+                <li><a href="#">Star Wars Roleplaying</a></li>
+                <li><a href="#">Starfinder</a></li>
+                <li><a href="#">Fate Core</a></li>
+                <li><a href="#">Star Trek Adventures</a></li>
+                <li><a href="#">Bubblegumshoe</a></li>
+                <li><a href="#">Feng Shui</a></li>
+                <li><a href="#">Masks</a></li>
+                <li><a href="#">Fiasco</a></li>
+                <li><a href="#">Numenera</a></li> -->
+            </ul>
+        </div>
+
+
+    </section>
   
 <div class="container" id="Info">
   <h3>Inverted Navbar</h3>
@@ -47,6 +75,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
 </body>
 
 </html>

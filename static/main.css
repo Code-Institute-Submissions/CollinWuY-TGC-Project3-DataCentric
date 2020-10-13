@@ -1,8 +1,39 @@
-#Info{
-    color: red;
+body {
+    margin: 0;
+    padding: 0;
+    outline: 0;
 }
+
 
 #navbar a{
     font-size: 2vh;
     color:black;
+}
+
+#searchLabel{
+    font-size: 1.25vh;
+    text-transform: uppercase;
+}
+
+#seachBar input{
+    padding: 2vh 3vh;
+}
+
+#menu {
+    background-color:antiquewhite;
+    text-align: center;
+    box-shadow: 0 6px 8px rgba(0,0,0,0.25);
+    width: 50%;
+    list-style:none;
+    padding: 0;
+}
+
+#menu li{
+    padding: 2vh 3vw;
+    box-shadow: 0 6px 8px rgba(0,0,0,0.25);
+    width: 100%;
+    font-family: Verdana;
+    font-size: 2vh;
+    letter-spacing: 3px;
+    font-weight: 600;
 }

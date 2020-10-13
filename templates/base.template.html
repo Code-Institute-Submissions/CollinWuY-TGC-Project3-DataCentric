@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}" />
     {% block css %}{% endblock %}
 
+    <link rel="icon" type="image/svg" href="{{url_for('static', filename='dungeon-solid.svg')}}">
 	<title>{% block title %}{% endblock %}</title> 
 </head>
 
@@ -36,28 +37,9 @@
             <span id="searchLabel">Famous Book Titles</span><br/>
             <input class="form-control" id="search" type="text" placeholder="Search for book...">
             <ul class="d-flex flex-column justify-content-center align-items-center mx-auto" id="menu">
-                <!-- <li><a href="#">Dungeon and Dragons</a></li>
-                <li><a href="#">Call of Cthulhu</a></li>
-                <li><a href="#">Blades in the Dark</a></li>
-                <li><a href="#">Warhammer Fantasy</a></li>
-                <li><a href="#">Deadlands</a></li>
-                <li><a href="#">Cyberpunk</a></li>
-                <li><a href="#">Paranoia</a></li>
-                <li><a href="#">Shadow of the Demon Lord</a></li>
-                <li><a href="#">Legend of the Five Rings</a></li>
-                <li><a href="#">Star Wars Roleplaying</a></li>
-                <li><a href="#">Starfinder</a></li>
-                <li><a href="#">Fate Core</a></li>
-                <li><a href="#">Star Trek Adventures</a></li>
-                <li><a href="#">Bubblegumshoe</a></li>
-                <li><a href="#">Feng Shui</a></li>
-                <li><a href="#">Masks</a></li>
-                <li><a href="#">Fiasco</a></li>
-                <li><a href="#">Numenera</a></li> -->
+             
             </ul>
         </div>
-
-
     </section>
   
 <div class="container" id="Info">

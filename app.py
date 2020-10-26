@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, jsonify
 from bson.json_util import dumps, loads
 from flask_pymongo import PyMongo
 import os
@@ -12,11 +12,37 @@ app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
 app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
 mongo = PyMongo(app)
 
+
 @app.route('/')
 def homepage():
     books = list(mongo.db.books.find())
-    return render_template('home.template.html', books = books)
+    return render_template('home.template.html', books=books)
 
+
+@app.route('/livesearch', methods=["POST", "GET"])
+def livesearch():
+    query = request.form.get('text')
+    data = list(mongo.db.books.find({"$text": {"$search": query}}))
+    print(data)
+    # list_data = list(data)
+    # print(list_data)
+    json_data = dumps(data)
+    print(json_data)
+    return json_data
+
+def query():
+    try:
+        query = "ro"
+        data = list(mongo.db.books.find())
+        print(data)
+        doc = mongo.db.books.find({"$text": {"$search": query}})
+        print(doc)
+        lis_doc = list(doc)
+        print(lis_doc)
+    except:
+        print("Error Connecting to Server")
+
+query()
 
 # "magic code" -- boilerplate
 if __name__ == '__main__':

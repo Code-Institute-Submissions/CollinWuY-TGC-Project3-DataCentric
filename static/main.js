@@ -23,34 +23,39 @@ $(document).ready(function(){
 
     // buildList(books)
 
-    function buildList(data){
-        let list = document.getElementById('menu');
-        list.innerHTML = ""
-        for(let i = 0; i < data.length; i++){
-            let newRow = `<li>${data[i].name}</li>`;
-            list.innerHTML += newRow
-        }
-    }
+    // function buildList(data){
+    //     let list = document.getElementById('menu');
+    //     list.innerHTML = ""
+    //     for(let i = 0; i < data.length; i++){
+    //         let newRow = `<li>${data[i].name}</li>`;
+    //         list.innerHTML += newRow
+    //     }
+    // }
 
-    $('#search').on('keyup', function(){
-        let value = $(this).val();
-        console.log("Value:", value);
-        console.log(books) // Check value on typing in search
-        let data = searchList(value,  books);
-        buildList(data);
+    $('#search').on('input', function(e){
+        let searchValue = $('#search').val();
+        console.log("Value:", searchValue);
+        $.ajax({
+            method: "POST",
+            url: "/livesearch",
+            data: {text: searchValue},
+            success: function(res){
+                console.log("ajax reply", res);
+            }
+        })
     })
 
-    function searchList(value, data){
-        let filteredData = [];
+    // function searchList(value, data){
+    //     let filteredData = [];
 
-        for(let i = 0; i < data.length; i++){
-            value = value.toLowerCase();
-            let name = data[i].name.toLowerCase();
+    //     for(let i = 0; i < data.length; i++){
+    //         value = value.toLowerCase();
+    //         let name = data[i].name.toLowerCase();
 
-            if (name.includes(value)){
-                filteredData.push(data[i])
-            }
-        }
-        return filteredData
-    }
+    //         if (name.includes(value)){
+    //             filteredData.push(data[i])
+    //         }
+    //     }
+    //     return filteredData
+    // }
 })

@@ -1,43 +1,96 @@
 body {
-    margin: 0;
-    padding: 0;
-    outline: 0;
+  margin: 0;
+  padding: 0;
+  outline: 0;
+}
+/* Logo Color: rgba(137,169,194,1); */
+/* Contrast Font Color: rgba(22, 22, 29, 0.7); */
+nav {
+  margin: 0;
+  padding: 0;
+  background-color: rgba(22, 22, 29, 0.7);
 }
 
-
-#navbar a{
-    font-size: 2vh;
-    color:black;
+#navbarCustom .nav-link.active,
+.nav-link:hover {
+  color: rgba(137, 169, 194, 1);
+  background-color: rgba(22, 22, 29, 1);
 }
 
-#searchLabel{
-    font-size: 1.25vh;
-    text-transform: uppercase;
+#navbarCustom .nav-link {
+  font-size: 2.5vh;
+  color: antiquewhite;
+  font-weight: bolder;
+  font-family: "Unica One", cursive;
+  letter-spacing: 3px;
 }
 
-#seachBar input{
-    padding: 2vh 3vh;
+#navbarCustom .nav-link .active {
+  color: aqua;
+  background-color: chartreuse;
+}
+
+header {
+  background-repeat: none;
+  background-size: cover;
+}
+
+#logo {
+  width: 200px;
+  height: 100px;
+}
+
+#searchWrapper {
+  background-color: rgba(22, 22, 29, 0.7);
+  height: auto;
+  width: 100vw;
+}
+
+#searchBar {
+  padding-bottom: 2vh;
+}
+
+#searchBar input {
+  box-shadow: 2px 6px 8px rgba(0, 0, 0, 0.25);
+}
+
+#navbar a {
+  font-size: 2vh;
+}
+
+#searchLabel {
+  font-size: 1.5vh;
+  color: antiquewhite;
+  font-weight: bolder;
+  font-family: "Unica One", cursive;
+  letter-spacing: 3px;
+}
+
+#seachBar input {
+  padding: 2vh 3vh;
 }
 
 #menu {
-    background-color:none;
-    box-shadow: 0 6px 8px rgba(0,0,0,0.25);
-    width: 100%;
-    list-style:none;
-    padding: 0;
-    height: auto;
-    flex-wrap: wrap;
+  background-color: antiquewhite;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  height: auto;
+  flex-wrap: wrap;
+  border-radius: 10px;
 }
 
-#menu li{
-    width: auto;
-    text-align: center;
-    background-color: antiquewhite;
-    padding: 1vh 1vw;
-    box-shadow: 0 6px 8px rgba(0,0,0,0.25);
-    font-family: Verdana;
-    font-size: 1.5vh;
-    letter-spacing: 3px;
-    font-weight: 600;
-    margin: 1vh 1vw;
+#menu li {
+  width: auto;
+  text-align: center;
+  background-color: rgba(137, 169, 194, 1);
+  padding: 1vh 1vw;
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.5vh;
+  color: rgba(22, 22, 29, 1);
+  letter-spacing: 3px;
+  font-weight: 600;
+  margin: 1vh 1vw;
 }

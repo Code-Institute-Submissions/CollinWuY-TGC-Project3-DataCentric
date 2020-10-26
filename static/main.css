@@ -12,7 +12,7 @@ nav {
 }
 
 #navbarCustom .nav-link.active,
-.nav-link:hover {
+#navbarCustom .nav-link:hover {
   color: rgba(137, 169, 194, 1);
   background-color: rgba(22, 22, 29, 1);
 }

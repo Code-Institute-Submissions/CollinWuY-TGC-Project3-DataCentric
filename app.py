@@ -32,10 +32,13 @@ def livesearch():
 
 def query():
     try:
-        query = "ro"
+        
         data = list(mongo.db.books.find())
         print(data)
-        doc = mongo.db.books.find({"$text": {"$search": query}})
+        query = "room"
+        # doc = mongo.db.books.find({"$text": {"$search": "/.*boo.*/"}})
+        # doc = mongo.db.books.find({"book_name":/.*boo.*/}).pretty()
+        doc = mongo.db.books.find({"book_name": {"$regex": '.*b.*'}})
         print(doc)
         lis_doc = list(doc)
         print(lis_doc)

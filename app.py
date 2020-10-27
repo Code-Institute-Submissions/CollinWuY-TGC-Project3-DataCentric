@@ -22,7 +22,8 @@ def homepage():
 @app.route('/livesearch', methods=["POST", "GET"])
 def livesearch():
     query = request.form.get('text')
-    data = list(mongo.db.books.find({"$text": {"$search": query}}))
+    print(query)
+    data = mongo.db.books.find({"book_name": {"$regex": query}})
     print(data)
     # list_data = list(data)
     # print(list_data)
@@ -30,22 +31,23 @@ def livesearch():
     print(json_data)
     return json_data
 
-def query():
-    try:
+# def query():
+#     try:
         
-        data = list(mongo.db.books.find())
-        print(data)
-        query = "room"
-        # doc = mongo.db.books.find({"$text": {"$search": "/.*boo.*/"}})
-        # doc = mongo.db.books.find({"book_name":/.*boo.*/}).pretty()
-        doc = mongo.db.books.find({"book_name": {"$regex": '.*b.*'}})
-        print(doc)
-        lis_doc = list(doc)
-        print(lis_doc)
-    except:
-        print("Error Connecting to Server")
+#         data = list(mongo.db.books.find())
+#         print(data)
+#         query = request.form.get("text")
+#         print(query)
+#         # doc = mongo.db.books.find({"$text": {"$search": "/.*boo.*/"}})
+#         # doc = mongo.db.books.find({"book_name":/.*boo.*/}).pretty()
+#         doc = mongo.db.books.find({"book_name": {"$regex": ".*bo.*"}})
+#         print(doc)
+#         lis_doc = list(doc)
+#         print(lis_doc)
+#     except:
+#         print("Error Connecting to Server")
 
-query()
+# query()
 
 # "magic code" -- boilerplate
 if __name__ == '__main__':

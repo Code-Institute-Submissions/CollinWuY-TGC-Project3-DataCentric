@@ -1,27 +1,4 @@
 $(document).ready(function(){
-    // let bookList = [{{books}}];
-    // [
-    // {"name": "Dungeon and Dragons"},
-    // {"name": "Call of Cthulhu"},
-    // {"name": "Blades in the Dark"},
-    // {"name": "Warhammer Fantasy"},
-    // {"name": "Deadlands"},
-    // {"name": "Cyberpunk"},
-    // {"name": "Paranoia"},
-    // {"name": "Shadow of the Demon Lord"},
-    // {"name": "Legend of the Five Rings"},
-    // {"name": "Star Wars Roleplaying"},
-    // {"name": "Starfinder"},
-    // {"name": "Fate Core"},
-    // {"name": "Star Trek Adventures"},
-    // {"name": "Bubblegumshoe"},
-    // {"name": "Feng Shui"},
-    // {"name": "Masks"},
-    // {"name": "Fiasco"},
-    // {"name": "Numenera"},
-    // ]   
-
-    // buildList(books)
 
     // function buildList(data){
     //     let list = document.getElementById('menu');
@@ -40,7 +17,16 @@ $(document).ready(function(){
             url: "/livesearch",
             data: {text: searchValue},
             success: function(res){
-                console.log("ajax reply", res);
+                // console.log("ajax reply", res); // Testing Response
+                let bookData = JSON.parse(res);
+                // console.log(bookData);
+                // console.log(bookData[0].book_name); // Testing Json access
+                let list = document.getElementById('menu');
+                list.innerHTML = ""
+                for (let i=0; i < bookData.length; i++){
+                    let newRow = `<li>${bookData[i].book_name}</li>`;
+                    list.innerHTML += newRow
+                }
             }
         })
     })

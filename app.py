@@ -15,7 +15,7 @@ mongo = PyMongo(app)
 
 @app.route('/')
 def homepage():
-    books = list(mongo.db.books.find())
+    books = list(mongo.db.books.find().limit(3))
     return render_template('home.template.html', books=books)
 
 
@@ -23,10 +23,9 @@ def homepage():
 def livesearch():
     query = request.form.get('text')
     print(query)
-    data = mongo.db.books.find({"book_name": {"$regex": query}})
-    print(data)
-    # list_data = list(data)
-    # print(list_data)
+    # data = mongo.db.books.find({"book_category": {"$regex": query}})
+    data = mongo.db.books.find({'$text': {'$search': query}})
+    # print(data)
     json_data = dumps(data)
     print(json_data)
     return json_data

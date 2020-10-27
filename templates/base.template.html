@@ -21,8 +21,8 @@
 
 <body>
 <!-- Nav Bar -->
-    <header style="background-image: url(/static/TabletopBanner.png)">
-        <nav class="navbar navbar-expand-lg px-5 pt-2 pb-5" id="navbar">
+    <header class="container-fluid">
+        <nav class="navbar fixed-top navbar-expand-lg px-5 pt-1 pb-2" id="navbar">
             <a class="navbar-brand" href="#"><img src="{{url_for('static', filename='TabletopLogo.png')}}" id="logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCustom" aria-controls="navbarCustom" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -36,30 +36,39 @@
                 </div>
             </div>
         </nav>
-<!-- Search Bar -->
-        <section id="searchWrapper">
-            <div class="container" id="searchBar">
-                <span id="searchLabel">Famous Book TiTles</span><br/>
-                <input class="form-control mb-1" name="search" id="search" type="text" placeholder="Search for book...">
-                <ul class="d-flex justify-content-center align-items-center mx-auto mt-3 py-2" id="menu">
-                {%if books|length > 0%}
-                    {%for book in books%}
-                    <li> {{ book.book_name}} </li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            </div>
-        </section>
     </header>
-<!-- Main Content -->
-<section id="mainContent">
-    <div class="container">
-        {%block content%}{%endblock%}
-    </div>
-</section>
-<footer>
+    <!-- Search Bar -->
+    <section id="searchWrapper" style="background-image: url(/static/TabletopBanner.png)">
+        <div class="container mt-4 py-3" id="searchBar">
+            <span id="searchLabel">Famous Book TiTles</span><br/>
+            <input class="form-control mb-1" name="search" id="search" type="text" placeholder="Search for book...">
+            <ul class="d-flex justify-content-center align-items-center mx-auto mt-3 py-2" id="menu">
+            {%if books|length > 0%}
+                {%for book in books[:5]%}
+                <li> {{ book.book_name}} </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+    </section>
 
-</footer>
+<!-- Main Content -->
+    <section id="mainContent">
+        <div class="container">
+            {%block content%}{%endblock%}
+        </div>
+    </section>
+    <footer>
+        <div class="container-fluid d-flex">
+            <div class="container flex-fill" id="footer-logo" style="background-color: red">
+            </div>
+            <div class="container flex-fill" id="footer-social" style="background-color: blue">
+            </div>
+            <div class="container flex-fill" id="footer-contact" style="background-color: green">
+            </div>
+
+        </div>
+    </footer>
 
 
 	<!-- Optional JavaScript -->

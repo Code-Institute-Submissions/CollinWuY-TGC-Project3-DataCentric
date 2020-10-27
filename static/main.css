@@ -8,7 +8,15 @@ body {
 nav {
   margin: 0;
   padding: 0;
-  background-color: rgba(22, 22, 29, 0.7);
+  background-color: rgba(22, 22, 29, 0.8);
+}
+
+footer {
+    width: 100vw;
+    height: 20vh;
+}
+#mainContent{
+    height: 100vh;
 }
 
 #navbarCustom .nav-link.active,
@@ -30,24 +38,23 @@ nav {
   background-color: chartreuse;
 }
 
-header {
-  background-repeat: none;
-  background-size: cover;
-}
-
 #logo {
   width: 200px;
   height: 100px;
 }
 
 #searchWrapper {
-  background-color: rgba(22, 22, 29, 0.7);
+  background-repeat: none;
+  background-size: cover;
+  background-position: top;
   height: auto;
   width: 100vw;
+  padding-top: 13vh;
+  padding-bottom: 2vh;
 }
 
 #searchBar {
-  padding-bottom: 4vh;
+    background-color: rgba(22, 22, 29, 0.8);
 }
 
 #searchBar input {
@@ -93,4 +100,9 @@ header {
   letter-spacing: 3px;
   font-weight: 600;
   margin: 1vh 1vw;
+}
+
+#footer-logo {
+
+
 }

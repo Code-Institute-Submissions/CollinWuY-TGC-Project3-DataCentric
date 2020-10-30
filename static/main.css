@@ -1,3 +1,7 @@
+html {
+    font-size: 15px;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -6,17 +10,13 @@ body {
 /* Logo Color: rgba(137,169,194,1); */
 /* Contrast Font Color: rgba(22, 22, 29, 0.7); */
 nav {
-  margin: 0;
-  padding: 0;
-  background-color: rgba(22, 22, 29, 0.8);
+  background-color: rgba(22, 22, 29, 0.9);
+  width: 100%;
 }
 
-footer {
-    width: 100vw;
-    height: 20vh;
-}
+
 #mainContent{
-    height: 100vh;
+    height: 80rem;
 }
 
 #navbarCustom .nav-link.active,
@@ -26,21 +26,22 @@ footer {
 }
 
 #navbarCustom .nav-link {
-  font-size: 2.5vh;
+  font-size: 1.2rem;
   color: antiquewhite;
   font-weight: bolder;
   font-family: "Unica One", cursive;
-  letter-spacing: 3px;
+  letter-spacing: 0.25rem;
 }
+
 
 #navbarCustom .nav-link .active {
   color: aqua;
   background-color: chartreuse;
 }
 
-#logo {
-  width: 200px;
-  height: 100px;
+#logo, #footerLogo {
+  width: 12rem;
+  height: 6rem;
 }
 
 #searchWrapper {
@@ -48,33 +49,26 @@ footer {
   background-size: cover;
   background-position: top;
   height: auto;
-  width: 100vw;
-  padding-top: 13vh;
-  padding-bottom: 2vh;
+  width: 100%;
+  padding-top: 8rem;
+  padding-bottom: 2rem;
 }
 
 #searchBar {
-    background-color: rgba(22, 22, 29, 0.8);
+    background-color: rgba(22, 22, 29, 0.9);
+    padding: 2rem 3rem;
 }
 
 #searchBar input {
   box-shadow: 2px 6px 8px rgba(0, 0, 0, 0.25);
 }
 
-#navbar a {
-  font-size: 2vh;
-}
-
 #searchLabel {
-  font-size: 1.5vh;
+  font-size: 0.8rem;
   color: antiquewhite;
   font-weight: bolder;
   font-family: "Unica One", cursive;
-  letter-spacing: 3px;
-}
-
-#seachBar input {
-  padding: 2vh 3vh;
+  letter-spacing: 0.25rem;
 }
 
 #menu {
@@ -85,24 +79,89 @@ footer {
   padding: 0;
   height: auto;
   flex-wrap: wrap;
-  border-radius: 10px;
+  border-radius: 0.75rem;
 }
 
 #menu li {
   width: auto;
   text-align: center;
   background-color: rgba(137, 169, 194, 1);
-  padding: 1vh 1vw;
+  padding: 1rem 1rem;
   box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
   font-family: "Montserrat", sans-serif;
-  font-size: 1.5vh;
+  font-size: 1.2rem;
   color: rgba(22, 22, 29, 1);
-  letter-spacing: 3px;
+  letter-spacing: 0.2rem;
   font-weight: 600;
-  margin: 1vh 1vw;
+  margin: 1rem 1rem;
+}
+
+footer {
+    width: auto;
+    height: 20rem;
+    background-color: rgba(22, 22, 29, 0.9);
+}
+
+#footerWrapper {
+    height: 95%;
+    width: auto;
 }
 
 #footer-logo {
+    padding: 1rem 2rem 0;
+    height: 100%;
+    display: flex;
+    flex: 2;
+    align-items: center;
+    justify-content: center;
+    font-family: "Unica One", cursive;
+    color: antiquewhite;
+    font-weight: bolder;
+    letter-spacing: 0.25rem;
+}
 
+#footer-note {
+    padding: 2rem;
+    height: 100%;
+    display: flex;
+    flex: 2;
+    align-items: center;
+    justify-content: center;
+}
 
+#footer-note p{
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2rem;
+    font-weight: 400;
+    color:  rgba(137, 169, 194, 1);
+}
+
+#footer-contact {
+    padding: 0 0 0 7rem;
+    height: 100%;
+    display: flex;
+    flex: 3;
+    align-items: left;
+    justify-content: center;
+    flex-direction: column;
+    font-family: "Unica One", cursive;
+    font-weight: bold;
+}
+
+#footer-contact h3, #footer-note h3{
+    font-size: 1.5rem;
+    color: antiquewhite;
+    font-weight: bolder;
+    letter-spacing: 0.25rem;
+    margin: 0;
+    font-family: "Unica One", cursive;
+}
+#footerAddress {
+    font-size: 0.75rem;
+    border-top: solid  rgba(137, 169, 194, 1) 2px;
+}
+#social a img{
+    height: 60px;
+    width: 60px;
 }

@@ -1,33 +1,38 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for
+from dotenv import load_dotenv
+from bson.objectid import ObjectId
 from bson.json_util import dumps, loads
-from flask_pymongo import PyMongo
+import pymongo
 import os
 
-if os.path.exists("env.py"):
-    import env
+load_dotenv()
+# print(os.environ.get("MONGO_URL")) #double check connection to MongoDB
+MONGO_URL = os.environ.get('MONGO_URL')
+DB_NAME = "tabletop_shop"
+
+# create the MongoClient first
+# Global Variables
+client = pymongo.MongoClient(MONGO_URL)
+db = client[DB_NAME]
 
 app = Flask(__name__)
-
-app.config["MONGO_DBNAME"] = os.environ.get("MONGO_DBNAME")
-app.config["MONGO_URI"] = os.environ.get("MONGO_URI")
-mongo = PyMongo(app)
 
 
 @app.route('/')
 def homepage():
-    books = list(mongo.db.books.find().limit(3))
+    books = list(db.books.find().limit(3))
     return render_template('home.template.html', books=books)
 
 
 @app.route('/livesearch', methods=["POST", "GET"])
 def livesearch():
     query = request.form.get('text')
-    print(query)
-    # data = mongo.db.books.find({"book_category": {"$regex": query}})
-    data = mongo.db.books.find({'$text': {'$search': query}})
+    # print(query)
+    # data = db.books.find({"book_category": {"$regex": query}})
+    data = db.books.find({'$text': {'$search': query}})
     # print(data)
     json_data = dumps(data)
-    print(json_data)
+    # print(json_data)
     return json_data
 
 # def query():

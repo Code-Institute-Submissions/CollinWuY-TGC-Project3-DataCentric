@@ -35,6 +35,14 @@ def livesearch():
     # print(json_data)
     return json_data
 
+@app.route('/create')
+def show_create_form():
+    return render_template("create.template.html")
+
+@app.route('/create', methods=["POST"])
+def process_create_form():
+    return redirect(url_for('homepage'))
+
 # def query():
 #     try:
         

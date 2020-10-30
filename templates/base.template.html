@@ -53,11 +53,11 @@
     </section>
 
 <!-- Main Content -->
-    <section id="mainContent">
-        <div class="container">
-            {%block content%}{%endblock%}
-        </div>
+    <section class="container-fluid col-10" id="mainContent">
+        {%block content%}{%endblock%}
     </section>
+
+<!-- Footer -->
     <footer>
         <div class="container-fluid d-flex align-items-center justify-content-center" id="footerWrapper">
             <div class="container d-flex flex-column m-0" id="footer-logo">
@@ -123,7 +123,7 @@
                 </div>
                 <div class="form-row my-1">
                     <div class="col-10">
-                        <textarea class="form-control" style="resize: none" rows="3" placeholder="General Enquiry"></textarea>
+                        <textarea class="form-control" style="resize: none" rows="4" placeholder="General Enquiry"></textarea>
                     </div>
                 </div>
                 </form>

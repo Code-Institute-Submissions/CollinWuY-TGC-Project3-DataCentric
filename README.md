@@ -16,3 +16,23 @@ Records have Price (Amazon, etc...)
 Records have Reviews ( 5Stars)
 Records have Comments
 
+category
+{
+    "name":
+    "books": [],
+    "review_average":
+    "comments":
+}
+
+books
+{
+    "category": 
+    "name":
+    "author":
+    "release_date":
+    "price":
+    "reviews":
+    "comments":
+    "image":
+}
+

@@ -20,8 +20,17 @@ app = Flask(__name__)
 
 @app.route('/')
 def homepage():
-    books = list(db.books.find().limit(3))
-    return render_template('home.template.html', books=books)
+    books = list(db.books.find().sort("reviews", -1))
+    
+    search_list = list()
+    items_set = set()
+
+    for book in books:
+        if not book['category'] in items_set:
+            items_set.add(book['category'])
+            search_list.append(book)
+    # print(search_list)
+    return render_template('home.template.html', books=books, search_list=search_list)
 
 
 @app.route('/livesearch', methods=["POST", "GET"])

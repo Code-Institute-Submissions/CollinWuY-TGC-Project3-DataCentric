@@ -11,13 +11,15 @@ $(document).ready(function(){
             success: function(res){
                 // console.log("ajax reply", res); // Testing Response
                 let bookData = JSON.parse(res);
-                // console.log(bookData);
-                // console.log(bookData[0].book_name); // Testing Json access
+                console.log(bookData);
+                // console.log(bookData[0].category); // Testing Json access
+                var seenNames = {};
+
                 let list = document.getElementById('menu');
                 list.innerHTML = ""
 
                 for (let i=0; i < bookData.length; i++){
-                    let newRow = `<li>${bookData[i].book_name}</li>`;
+                    let newRow = `<li>${bookData[i].category}</li>`;
                     list.innerHTML += newRow
 
                 }

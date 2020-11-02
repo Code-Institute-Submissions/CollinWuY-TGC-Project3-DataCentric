@@ -44,8 +44,8 @@
             <input class="form-control mb-1" name="search" id="search" type="text" placeholder="Search for book...">
             <ul class="d-flex justify-content-center align-items-center mx-auto mt-3 py-2" id="menu">
             {%if books|length > 0%}
-                {%for book in books[:5]%}
-                <li> {{ book.book_name}} </li>
+                {%for book in search_list%}
+                    <li> {{ book.category}} </li>
                 {% endfor %}
             </ul>
             {% endif %}

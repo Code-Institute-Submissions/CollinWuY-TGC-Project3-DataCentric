@@ -1,6 +1,96 @@
-#popularTitle h2{
-    font-size: 3rem;
+#popularTitle h2 {
+  font-size: 3rem;
+  color: antiquewhite;
+  font-weight: bolder;
+  letter-spacing: 0.25rem;
+  margin: 0;
+  font-family: "Unica One", cursive;
+}
+
+.fixcolor{
+    color: #fd4;
+}
+
+.card-img-top:hover {
+    transition: all 0.3s ease-in-out;
+    transform: scale(1.2);
+}
+
+.card-body {
+    background-color:  rgba(22, 22, 29, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 1rem;
+}
+
+.card-title {
+    font-size: 1rem;
     color: antiquewhite;
+    font-weight: bolder;
+    letter-spacing: 0.25rem;
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    flex: 2;
+}
+
+.ratings {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row-reverse;
+  margin: 0.25rem 0;
+  flex: 1;
+  width: 16rem;
+}
+
+.ratings input {
+  display: none;
+  width: 10rem;
+}
+
+.ratings label {
+  font-size: 1.5rem;
+  font-family: fontAwesome;
+  color: antiquewhite;
+  padding: 0.2rem;
+  position: relative;
+  transition: all 0.2 ease-in;
+  text-shadow: 0 3px 6px darkgrey;
+}
+
+/* .ratings input:not(:checked) ~ label:hover,
+.ratings input:not(:checked) ~ label:hover ~ label {
+  color: #fd4;
+}
+
+.ratings input:checked ~ label {
+  color: #fd4;
+} */
+
+/* .ratings input#star5-0:checked ~ label {
+  color: #fe7;
+  text-shadow: 0 3px 6px #952;
+} */
+
+.rating-score{
+    text-align: center;
+    font-size: 0.75rem;
+    align-self: top;
+    padding: 0 0.5rem 0 0;
+    flex-direction: column;
+    color: rgba(137, 169, 194, 1);
+    font-family: "Unica One", cursive;
+    font-weight: bolder;
+    letter-spacing: 0.25rem;
+    margin: 0;
+    width: 5rem;
+}
+
+.card-comments{
+    flex: 2;
+    font-size: 1rem;
+    color: rgba(137, 169, 194, 1);
     font-weight: bolder;
     letter-spacing: 0.25rem;
     margin: 0;

@@ -1,6 +1,93 @@
 {% extends 'base.template.html'%}
+{%block css%}
+<style>
+#createTitle h2 {
+  font-size: 3rem;
+  color: antiquewhite;
+  font-weight: bolder;
+  letter-spacing: 0.25rem;
+  margin: 0;
+  font-family: "Unica One", cursive;
+}
 
+#formContainer {
+    width: 50rem;
+    height: auto;
+    padding: 2rem;
+    background-color: rgba(22, 22, 29, 0.9);
+}
+
+label{
+    display: flex;
+    padding: 1rem 1rem;
+    margin-right: 0.5rem;
+    font-size: 1.25rem;
+    color: antiquewhite;
+    font-weight: bolder;
+    letter-spacing: 0.25rem;
+    margin: 0;
+    font-family: "Unica One", cursive;
+}
+
+.form-group {
+    justify-content: space-between;
+    padding:0 2rem;
+}
+
+small {
+  color: antiquewhite;
+  font-weight: bolder;
+  letter-spacing: 0.25rem;
+  margin: 0;
+  font-family: "Unica One", cursive;
+}
+
+#formComments{
+    padding: 2rem;
+}
+
+</style>
+{%endblock%}
+{%block script%}{%endblock%}
 {%block content%}
+<div class="container-fluid d-flex justify-content-center mx-auto my-5" id="createTitle">
+    <h2> Send in a Review </h2>
+</div>
+<div class="container" id="formContainer">
+    <form method="POST">
+        <div class="form-group form-inline row">
+            <label for="bookName">Book's Title: </label>
+            <input type="text" class="form-control col-7" id="bookName" placeholder="E.g. Dungeons and Dragons 5E PHB">
+        </div>
+          <div class="form-group form-inline row">
+            <label for="bookCategory">Book's Series: </label>
+            <input type="text" class="form-control col-7" id="bookCategory" placeholder="E.g. Dungeons and Dragons / Call of Cthulhu">
+        </div>
+        <div class="form-group form-inline row">
+            <label for="bookAuthor">Book's Company: </label>
+            <input type="text" class="form-control col-7" id="bookAuthor" placeholder="E.g. Wizards of the Coast / Chaosium">
+        </div>
+        <div class="form-group form-inline row">
+            <label for="bookRelease_Date">Publish Year: </label>
+            <input type="number" step="1" class="form-control col-7" id="bookRelease_Date" placeholder="YYYY">
+        </div>
+        <div class="form-group form-inline row">
+            <label for="bookPrice">Book's Price: </label>
+            <input type="text" class="form-control col-7" id="bookPrice" placeholder="CUR $$.$$ format">
+        </div>
+        <div class="form-group row d-flex flex-column justify-content-center align-items-center" >
+            <label for="bookImage">Book Cover Image Web Link: </label>
+            <input type="text" class="form-control col-11" id="bookImage" placeholder="Image Size: 600px by 400px .png .jpeg .jp .svg format">
+        </div>
+        <small id="imageHelpBlock" class="form-text text-center">
+            If you need a hosting site, try www.cloudinary.com
+        </small>
+        <div class="form-group row d-flex flex-column justify-content-center align-items-center" id="formComments">
+            <label for="bookComments">Comments: </label>
+            <textarea class="form-control col-10" id="bookComments" rows="8" style="resize: none;"></textarea>
+        </div>
+    </form>
+</div>
 
 
 {%endblock%}

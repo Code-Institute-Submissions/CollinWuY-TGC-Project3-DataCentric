@@ -87,27 +87,27 @@ small {
     <form method="POST">
         <div class="form-group form-inline row">
             <label for="bookName">Book's Title: </label>
-            <input type="text" class="form-control col-7" id="bookName" placeholder="E.g. Dungeons and Dragons 5E PHB" name="bookName">
+            <input type="text" class="form-control col-7" id="bookName" placeholder="E.g. Dungeons and Dragons 5E PHB" name="bookName" value="{{book.name}}">
         </div>
           <div class="form-group form-inline row">
             <label for="bookCategory">Book's Series: </label>
-            <input type="text" class="form-control col-7" id="bookCategory" placeholder="E.g. Dungeons and Dragons / Call of Cthulhu" name="bookCategory">
+            <input type="text" class="form-control col-7" id="bookCategory" placeholder="E.g. Dungeons and Dragons / Call of Cthulhu" name="bookCategory" value="{{book.category}}">
         </div>
         <div class="form-group form-inline row">
             <label for="bookAuthor">Book's Company: </label>
-            <input type="text" class="form-control col-7" id="bookAuthor" placeholder="E.g. Wizards of the Coast / Chaosium" name="bookAuthor">
+            <input type="text" class="form-control col-7" id="bookAuthor" placeholder="E.g. Wizards of the Coast / Chaosium" name="bookAuthor" value="{{book.author}}">
         </div>
         <div class="form-group form-inline row">
             <label for="bookRelease_Date">Publish Year: </label>
-            <input type="number" step="1" class="form-control col-7" id="bookRelease_Date" placeholder="YYYY" name="bookRelease_Date">
+            <input type="number" step="1" class="form-control col-7" id="bookRelease_Date" placeholder="YYYY" name="bookRelease_Date" value="{{book.release_date}}">
         </div>
         <div class="form-group form-inline row">
             <label for="bookPrice">Book's Price: </label>
-            <input type="text" class="form-control col-7" id="bookPrice" placeholder="CUR $$.$$ format" name="bookPrice">
+            <input type="text" class="form-control col-7" id="bookPrice" placeholder="CUR $$.$$ format" name="bookPrice" value="{{book.price}}">
         </div>
         <div class="form-group row d-flex flex-column justify-content-center align-items-center mb-0">
             <label for="bookImage">Book Cover Image Web Link: </label>
-            <input type="text" class="form-control col-11" id="bookImage" placeholder="Image Size: 600px by 400px .png .jpeg .jp .svg format" name="bookImage">
+            <input type="text" class="form-control col-11" id="bookImage" placeholder="Image Size: 600px by 400px .png .jpeg .jp .svg format" name="bookImage" value="{{book.image}}">
         </div>
         <small id="imageHelpBlock" class="form-text text-center m-0">
             If you need a hosting site, try www.cloudinary.com
@@ -122,7 +122,7 @@ small {
             <input type="radio" name="rate" id="star2" value="2"><label for="star2" class="fas fa-star"></label>
             <input type="radio" name="rate" id="star1" value="1"><label for="star1" class="fas fa-star"></label>
         </div>
-        <div class="form-group row d-flex flex-column justify-content-center align-items-center" id="formComments">
+        <div class="form-group row d-flex flex-column justify-content-center align-items-center" id="formComments" value="{{book.comments}}">
             <label for="bookComments">Comments: </label>
             <textarea class="form-control col-10" id="bookComments" rows="4" maxlength="300" style="resize: none;" name="bookComments"></textarea>
         </div>

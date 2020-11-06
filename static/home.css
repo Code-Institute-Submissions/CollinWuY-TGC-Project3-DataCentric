@@ -31,7 +31,8 @@
     letter-spacing: 0.25rem;
     margin: 0;
     font-family: "Montserrat", sans-serif;
-    flex: 2;
+    flex: 1;
+    text-align: center;
 }
 
 .ratings {
@@ -74,11 +75,11 @@
 }
 
 .card-comments{
-    flex: 2;
-    font-size: 1rem;
+    flex: 3;
+    font-size: 0.75rem;
     color: rgba(137, 169, 194, 1);
-    font-weight: bolder;
+    font-weight: bold;
     letter-spacing: 0.25rem;
     margin: 0;
-    font-family: "Unica One", cursive;
+    font-family: "Montserrat", sans-serif;
 }

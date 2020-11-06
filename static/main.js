@@ -28,6 +28,24 @@ $(document).ready(function(){
         })
     })
 
+    $('#ratings').click(function(){
+        ratingScore();
+    })
+
+    function ratingScore(){
+        let rating = document.getElementsByName("rate");
+        if(rating[4].checked){
+            console.log(rating[4].value);
+        } else if(rating[3].checked){
+            console.log(rating[3].value);
+        }else if(rating[2].checked){
+            console.log(rating[2].value);
+        }else if(rating[1].checked){
+            console.log(rating[1].value);
+        }else{
+            console.log(rating[0].value);
+        }
+    }
 
 
 })

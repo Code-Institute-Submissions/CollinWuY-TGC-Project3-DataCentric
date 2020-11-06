@@ -59,20 +59,6 @@
   text-shadow: 0 3px 6px darkgrey;
 }
 
-/* .ratings input:not(:checked) ~ label:hover,
-.ratings input:not(:checked) ~ label:hover ~ label {
-  color: #fd4;
-}
-
-.ratings input:checked ~ label {
-  color: #fd4;
-} */
-
-/* .ratings input#star5-0:checked ~ label {
-  color: #fe7;
-  text-shadow: 0 3px 6px #952;
-} */
-
 .rating-score{
     text-align: center;
     font-size: 0.75rem;

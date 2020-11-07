@@ -10,10 +10,10 @@
 <div class="container-fluid d-flex justify-content-center mx-auto my-5" id="popularTitle">
     <h2> Most Popular Tabletop RPG Books by Rating </h2>
 </div>
-<div class="container-fluid d-flex flex-row justify-content-between my-5">
+<div class="container-fluid d-flex flex-row justify-content-between my-5 flex-wrap">
     {%if books|length > 0%}
-        {%for book in top5 %}
-            <div class="card" style="width: 18rem;">
+        {%for book in top4 %}
+            <div class="card flex-shrink-0 m-3" style="width: 18rem;">
                 <a href="#"><img class="card-img-top" src="{{book.image}}" style="height: 400px;" alt="Card image cap"></a>
                 <div class="card-body">
                     <h5 class="card-title">{{book.name}}</h5>
@@ -46,7 +46,7 @@
                 </div>
             </div>
         </div>
-        <!-- <a href="{{url_for('show_edit_book', book_id=book._id)}}" class="btn btn-secondary">Edit</a> -->
+        <a href="{{url_for('show_edit_book', book_id=book._id)}}" class="btn btn-info">Edit</a>
         {%endfor%}
     {%endif%}
 </div>       

@@ -14,7 +14,7 @@
     {%if books|length > 0%}
         {%for book in top4 %}
             <div class="card flex-shrink-0 m-3" style="width: 18rem;">
-                <a href="#"><img class="card-img-top" src="{{book.image}}" style="height: 400px;" alt="Card image cap"></a>
+                <a href="{{url_for('show_books_in_category', book_category=book.category)}}"><img class="card-img-top" src="{{book.image}}" style="height: 400px;" alt="Card image cap"></a>
                 <div class="card-body">
                     <h5 class="card-title">{{book.name}}</h5>
                 <div class="ratings">
@@ -44,10 +44,6 @@
                 <div class="card-comments">
                     <p class="card-text">{{book.comments}}</p>
                 </div>
-            </div>
-            <div>
-                <a href="{{url_for('show_edit_book', book_id=book._id)}}" class="btn btn-info">Edit</a>
-                <a href="{{url_for('show_delete_book', book_id=book._id)}}" class="btn btn-danger">Delete</a>
             </div>
         </div>
         {%endfor%}

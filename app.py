@@ -48,6 +48,24 @@ def livesearch():
     return json_data
 
 
+@app.route('/category/<book_category>')
+def show_books_in_category(book_category):
+    category = db.category.aggregate([{
+        '$lookup': {
+            'from': 'books',
+            'localField': 'name',
+            'foreignField': 'category',
+            'as': 'books'
+        }}, {
+        '$match': {
+            "name": book_category
+        }}])
+
+    print(category)
+
+    return render_template('show_category_books.template.html', cat=category)
+
+
 @app.route('/create')
 def show_create_form():
     return render_template("create.template.html")

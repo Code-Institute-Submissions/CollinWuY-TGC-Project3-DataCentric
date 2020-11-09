@@ -25,14 +25,23 @@
 <!-- Nav Bar -->
     <header class="container-fluid">
         <nav class="navbar fixed-top navbar-expand-lg px-5 pt-1 pb-2" id="navbar">
-            <a class="navbar-brand" href="#"><img src="{{url_for('static', filename='TabletopLogo.png')}}" id="logo"></a>
+            <a class="navbar-brand" href="{{url_for('homepage')}}"><img src="{{url_for('static', filename='TabletopLogo.png')}}" id="logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCustom" aria-controls="navbarCustom" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarCustom">
                 <div class="navbar-nav ml-auto">
                 <a class="nav-link active" href="{{ url_for('homepage') }}">Home <span class="sr-only">(current)</span></a>
-                <a class="nav-link" href="#">Browse</a>
+                <div class="dropdown show">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Browse</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        {%if books | length > 0%}
+                            {%for book in books%}
+                                <a class="dropdown-item" href="#">{{book.category}}</a>
+                            {%endfor%}
+                        {%endif%}
+                    </div>
+                </div>
                 <a class="nav-link" href="{{url_for('show_create_form')}}">Review</a>
                 <a class="nav-link" href="#">Login</a>
                 </div>
@@ -47,7 +56,7 @@
             <ul class="d-flex justify-content-center flex-wrap align-items-center mx-auto mt-3 py-2" id="menu">
             {%if books|length > 0%}
                 {%for book in search_list%}
-                    <li> {{ book.category}} </li>
+                    <a href="#"><li>{{ book.category}}</li></a>
                 {% endfor %}
             </ul>
             {% endif %}

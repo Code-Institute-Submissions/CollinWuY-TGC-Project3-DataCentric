@@ -23,7 +23,7 @@ app.secret_key = os.environ.get('SECRET_KEY')
 def homepage():
     books = list(db.books.find().sort("reviews", -1))
     top4 = books[:4]
-    
+
     search_list = list()
     items_set = set()
 
@@ -32,7 +32,8 @@ def homepage():
             items_set.add(book['category'])
             search_list.append(book)
     # print(search_list)
-    return render_template('home.template.html', books=books, search_list=search_list, top4=top4)
+    return render_template('home.template.html',
+                           books=books, search_list=search_list, top4=top4)
 
 
 @app.route('/livesearch', methods=["POST", "GET"])
@@ -46,9 +47,11 @@ def livesearch():
     # print(json_data)
     return json_data
 
+
 @app.route('/create')
 def show_create_form():
     return render_template("create.template.html")
+
 
 @app.route('/create', methods=["POST"])
 def process_create_form():
@@ -61,7 +64,7 @@ def process_create_form():
     image = request.form.get('bookImage')
     reviews = request.form.getlist('rate')
     reviews = int(reviews[0])
-    
+
     new_record = {
         "category": category,
         "name": name,
@@ -79,31 +82,62 @@ def process_create_form():
 
     return redirect(url_for('homepage'))
 
+
 @app.route('/edit/<book_id>')
 def show_edit_book(book_id):
     book = db.books.find_one({
         '_id': ObjectId(book_id)
     })
     print(book)
-    return render_template('edit_book.template.html', book=book) 
+    return render_template('edit_book.template.html', book=book)
 
-# def query():
-#     try:
-        
-#         data = list(mongo.db.books.find())
-#         print(data)
-#         query = request.form.get("text")
-#         print(query)
-#         # doc = mongo.db.books.find({"$text": {"$search": "/.*boo.*/"}})
-#         # doc = mongo.db.books.find({"book_name":/.*boo.*/}).pretty()
-#         doc = mongo.db.books.find({"book_name": {"$regex": ".*bo.*"}})
-#         print(doc)
-#         lis_doc = list(doc)
-#         print(lis_doc)
-#     except:
-#         print("Error Connecting to Server")
 
-# query()
+@app.route('/edit/<book_id>', methods=["POST"])
+def process_edit_book(book_id):
+    name = request.form.get('bookName')
+    category = request.form.get('bookCategory')
+    author = request.form.get('bookAuthor')
+    release_date = request.form.get('bookRelease_Date')
+    price = request.form.get('bookPrice')
+    comments = request.form.get('bookComments')
+    image = request.form.get('bookImage')
+    reviews = request.form.getlist('rate')
+    reviews = int(reviews[0])
+
+    db.books.update_one({
+        "_id": ObjectId(book_id)
+    }, {
+        '$set': {
+            "category": category,
+            "name": name,
+            "author": author,
+            "release_date": release_date,
+            "price": price,
+            "reviews": reviews,
+            "comments": comments,
+            "image": image
+        }
+    })
+    return redirect(url_for('homepage'))
+
+
+@app.route('/delete/<book_id>')
+def show_delete_book(book_id):
+    book_to_delete = db.books.find_one({
+        '_id': ObjectId(book_id)
+    })
+
+    return render_template('show_delete_book.template.html',
+                           book=book_to_delete)
+
+
+@app.route('/delete/<book_id>', methods=["POST"])
+def confirm_delete_book(book_id):
+    db.books.remove({
+        '_id': ObjectId(book_id)
+    })
+    return redirect(url_for("homepage"))
+
 
 # "magic code" -- boilerplate
 if __name__ == '__main__':

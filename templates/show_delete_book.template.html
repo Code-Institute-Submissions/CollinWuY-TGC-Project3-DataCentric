@@ -1,0 +1,154 @@
+{% extends 'base.template.html' %}
+
+{% block css %} 
+<style>
+#deleteTitle h2{
+  font-size: 3rem;
+  color: antiquewhite;
+  font-weight: bolder;
+  letter-spacing: 0.25rem;
+  margin: 0;
+  font-family: "Unica One", cursive;
+}
+#popularTitle h2 {
+  font-size: 3rem;
+  color: antiquewhite;
+  font-weight: bolder;
+  letter-spacing: 0.25rem;
+  margin: 0;
+  font-family: "Unica One", cursive;
+}
+
+.fixcolor{
+    color: #fd4;
+}
+
+
+.card-img-top:hover {
+    transition: all 0.3s ease-in-out;
+    transform: scale(1.2);
+}
+
+.card-body {
+    background-color:  rgba(22, 22, 29, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    padding: 1rem;
+}
+
+.card-title {
+    font-size: 1rem;
+    color: antiquewhite;
+    font-weight: bolder;
+    letter-spacing: 0.25rem;
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+    flex: 1;
+    text-align: center;
+}
+
+.ratings {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row-reverse;
+  margin: 0.25rem 0;
+  flex: 1;
+  width: 16rem;
+}
+
+.ratings input {
+  display: none;
+  width: 10rem;
+}
+
+.ratings label {
+  font-size: 1.5rem;
+  font-family: fontAwesome;
+  color: antiquewhite;
+  padding: 0.2rem;
+  position: relative;
+  transition: all 0.2 ease-in;
+  text-shadow: 0 3px 6px darkgrey;
+}
+
+.rating-score{
+    text-align: center;
+    font-size: 0.75rem;
+    align-self: top;
+    padding: 0 0.5rem 0 0;
+    flex-direction: column;
+    color: rgba(137, 169, 194, 1);
+    font-family: "Unica One", cursive;
+    font-weight: bolder;
+    letter-spacing: 0.25rem;
+    margin: 0;
+    width: 5rem;
+}
+
+.card-comments{
+    flex: 3;
+    font-size: 0.85rem;
+    color: rgba(137, 169, 194, 1);
+    font-weight: bold;
+    letter-spacing: 0.25rem;
+    margin: 0;
+    font-family: "Montserrat", sans-serif;
+}
+</style>
+
+{% endblock %}
+
+{% block content %} 
+<div class="container-fluid d-flex justify-content-center mx-auto my-5" id="deleteTitle">
+    <h2> DELETING {{book.name}} Review</h2><br>
+</div>
+<div class="container-fluid d-flex flex-row justify-content-center align-align-items-center my-5 flex-wrap">
+            <div class="card flex-shrink-0 m-5" style="width: 18rem;">
+                <a href="#"><img class="card-img-top" src="{{book.image}}" style="height: 400px;" alt="Card image cap"></a>
+                <div class="card-body">
+                    <h5 class="card-title">{{book.name}}</h5>
+                <div class="ratings">
+                {%if book.reviews == 5 %}
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                {% elif book.reviews == 4 %}
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                {% elif book.reviews == 3 %}
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                {% elif book.reviews == 2 %}
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                {% elif book.reviews == 1 %}
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                {% endif %}
+                    <p class="card-text rating-score">Rating: {{book.reviews}} / 5</p>
+                </div>
+                <div class="card-comments">
+                    <p class="card-text">{{book.comments}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex align-items-center justify-content-center">
+            <form method="POST">
+                <div class="alert alert-danger">
+                    <p> Are you SURE you want to DELETE this {{book.name}} review ? </p>
+                    <div class="containter">
+                        <a href="{{url_for('homepage')}}" class="btn btn-success">Cancel</a>
+                        <input type="submit" class="btn btn-danger" value="DELETE">
+                    </div>
+                </div>
+            </form>
+        </div>
+</div>  
+
+{% endblock %}

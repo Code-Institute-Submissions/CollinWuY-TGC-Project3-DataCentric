@@ -1,4 +1,4 @@
-### Database Planning ###
+## Database Planning ###
 
 Tabletop books review site community
 Public can see all records
@@ -16,6 +16,7 @@ Records have Price (Amazon, etc...)
 Records have Reviews ( 5Stars)
 Records have Comments
 
+```
 category
 {
     "name":
@@ -23,7 +24,8 @@ category
     "review_average":
     "comments":
 }
-
+```
+```
 books
 {
     "category": 
@@ -35,6 +37,6 @@ books
     "comments":
     "image":
 }
-
+```
 
 https://www.youtube.com/watch?v=Ep78KjstQuw Rating Stars

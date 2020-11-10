@@ -1,23 +1,31 @@
-#popularTitle h2 {
-  font-size: 3rem;
-  color: antiquewhite;
-  font-weight: bolder;
-  letter-spacing: 0.25rem;
-  margin: 0;
-  font-family: "Unica One", cursive;
-  border-top: 8px double rgba(137, 169, 194, 1);
-  border-bottom: 8px double rgba(137, 169, 194, 1);
-  padding: 0.25rem;
+#infoCard{
+    flex:1;
+}
+#infoBoard{
+    flex:2;
+}
+
+#infoTitle h2{
+    font-size: 4rem;
+    font-weight: bolder;
+    letter-spacing: 0.25rem;
+    margin: 0;
+    font-family: "Unica One", cursive;
+    color: antiquewhite;
+    border-top: 4px solid rgba(137, 169, 194, 1);
+    border-bottom: 4px solid rgba(137, 169, 194, 1);
+}
+#infoTitle h3{
+    font-size: 2rem;
+    font-weight: bolder;
+    letter-spacing: 0.25rem;
+    margin: 0;
+    font-family: "Unica One", cursive;
+    color: antiquewhite;
 }
 
 .fixcolor{
     color: #fd4;
-}
-
-
-.card:hover {
-    transition: all 0.3s ease-in-out;
-    transform: scale(1.2);
 }
 
 .card-body {
@@ -79,7 +87,7 @@
 }
 
 .card-comments{
-    flex: 1;
+    flex: 3;
     font-size: 0.75rem;
     color: rgba(137, 169, 194, 1);
     font-weight: bold;

@@ -22,7 +22,7 @@ app.secret_key = os.environ.get('SECRET_KEY')
 @app.route('/')
 def homepage():
     books = list(db.books.find().sort("reviews", -1))
-    top4 = books[:4]
+    top = books[:3]
 
     search_list = list()
     items_set = set()
@@ -33,7 +33,7 @@ def homepage():
             search_list.append(book)
     # print(search_list)
     return render_template('home.template.html',
-                           books=books, search_list=search_list, top4=top4)
+                           books=books, search_list=search_list, top=top)
 
 
 @app.route('/livesearch', methods=["POST", "GET"])
@@ -60,10 +60,15 @@ def show_books_in_category(book_category):
         '$match': {
             "name": book_category
         }}])
-
-    print(category)
-
     return render_template('show_category_books.template.html', cat=category)
+
+
+@app.route('/info/<book_id>')
+def show_book_info(book_id):
+    book = db.books.find_one({
+        '_id': ObjectId(book_id)
+    })
+    return render_template('book_info.template.html', book=book)
 
 
 @app.route('/create')
@@ -93,11 +98,8 @@ def process_create_form():
         "comments": comments,
         "image": image
     }
-
-    print(new_record)
     db.books.insert_one(new_record)
     flash("New book review is created successfully!", "success")
-
     return redirect(url_for('homepage'))
 
 
@@ -106,7 +108,6 @@ def show_edit_book(book_id):
     book = db.books.find_one({
         '_id': ObjectId(book_id)
     })
-    print(book)
     return render_template('edit_book.template.html', book=book)
 
 

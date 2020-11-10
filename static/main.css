@@ -54,6 +54,10 @@ nav {
   background-color: chartreuse;
 }
 
+.navbar-toggler{
+    background-color: rgba(137, 169, 194, 1);
+}
+
 #logo, #footerLogo {
   width: 12rem;
   height: 6rem;
@@ -136,7 +140,7 @@ footer {
     padding: 1rem 2rem 0;
     height: 100%;
     display: flex;
-    flex: 2;
+    flex: 1;
     align-items: center;
     justify-content: center;
     font-family: "Unica One", cursive;
@@ -149,7 +153,7 @@ footer {
     padding: 2rem;
     height: 100%;
     display: flex;
-    flex: 2;
+    flex: 1;
     align-items: center;
     justify-content: center;
 }
@@ -163,10 +167,9 @@ footer {
 }
 
 #footer-contact {
-    padding: 0 0 0 7rem;
     height: 100%;
     display: flex;
-    flex: 3;
+    flex: 1;
     align-items: left;
     justify-content: center;
     flex-direction: column;

@@ -1,18 +1,37 @@
 {% extends 'base.template.html' %}
 
-{% block css %}{%endblock%}
+{% block css %}
+<link rel="stylesheet" href="{{url_for('static', filename='home.css')}}" />
+<style>
+#cateogryTitle h2{
+    font-size: 2rem;
+    color: antiquewhite;
+    font-weight: bolder;
+    letter-spacing: 0.25rem;
+    margin: 0;
+    font-family: "Unica One", cursive;
+}
+#cateogryTitle h2 b{
+    font-size: 4rem;
+    color: rgba(137, 169, 194, 1);
+    border-top: 4px solid antiquewhite;
+    border-bottom: 4px solid antiquewhite;
+}
+</style>
+{%endblock%}
+
 {% block script %}{%endblock%}
 
 {%block content%}
 
-<div class="container-fluid d-flex justify-content-center mx-auto my-5" id="popularTitle">
-    <h2> Most Popular Tabletop RPG Books by Rating </h2>
+{%for category in cat%}
+<div class="container-fluid d-flex justify-content-center mx-auto my-5" id="cateogryTitle">  
+    <h2> Books in <b>{{category.name}}</b> Category </h2>
 </div>
 <div class="container-fluid d-flex flex-row justify-content-around my-5 flex-wrap">
-        {%for doc in cat %}
-            {%for book in doc.books%}
+            {%for book in category.books%}
                 <div class="card flex-shrink-0 m-3" style="width: 18rem;">
-                    <a href="#"><img class="card-img-top" src="{{book.image}}" style="height: 400px;" alt="Card image cap"></a>
+                    <a href="{{url_for('show_book_info', book_id=book._id)}}"><img class="card-img-top" src="{{book.image}}" style="height: 400px;" alt="Card image cap"></a>
                     <div class="card-body">
                         <h5 class="card-title">{{book.name}}</h5>
                     <div class="ratings">
@@ -43,13 +62,8 @@
                         <p class="card-text">{{book.comments}}</p>
                     </div>
                 </div>
-                <div>
-                    <a href="{{url_for('show_edit_book', book_id=book._id)}}" class="btn btn-info">Edit</a>
-                    <a href="{{url_for('show_delete_book', book_id=book._id)}}" class="btn btn-danger">Delete</a>
-                </div>
             </div>
-            {%endfor%}
-        {%endfor%}
+          {%endfor%}
 </div>  
-
+{%endfor%}
 {% endblock %}

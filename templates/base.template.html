@@ -24,7 +24,7 @@
 <body>
 <!-- Nav Bar -->
     <header class="container-fluid">
-        <nav class="navbar fixed-top navbar-expand-lg px-5 pt-1 pb-2" id="navbar">
+        <nav class="navbar navbar-dark fixed-top navbar-expand-lg px-5 pt-1 pb-2" id="navbar">
             <a class="navbar-brand" href="{{url_for('homepage')}}"><img src="{{url_for('static', filename='TabletopLogo.png')}}" id="logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCustom" aria-controls="navbarCustom" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -56,7 +56,7 @@
             <ul class="d-flex justify-content-center flex-wrap align-items-center mx-auto mt-3 py-2" id="menu">
             {%if books|length > 0%}
                 {%for book in search_list%}
-                    <a href="#"><li>{{ book.category}}</li></a>
+                    <a href="{{url_for('show_books_in_category', book_category=book.category)}}"><li>{{ book.category}}</li></a>
                 {% endfor %}
             </ul>
             {% endif %}
@@ -64,7 +64,7 @@
     </section>
 
 <!-- Main Content -->
-    <section class="container-fluid col-10" id="mainContent">
+    <section class="container-fluid col-12" id="mainContent">
         {%block content%}{%endblock%}
     </section>
 
@@ -108,19 +108,19 @@
             </div>
             <div class="container" id="footer-contact">
             <form method="POST">  
-                <div class="form-row d-flex justify-content-left">
+                <div class="form-row d-flex justify-content-between">
                     <div class="col-8 mr-2 d-flex align-items-center">
                         <h3>Contact Us</h3>
                     </div>
-                    <div class="col-2">
-                        <input type="submit" class="btn btn-primary" value="Enquire">
+                    <div class="col-3 mr-2">
+                        <input type="submit" class="btn btn-primary btn-sm px-3" value="Enquire">
                     </div>
                 </div>                                
                 <div class="form-row my-2">
-                    <div class="col-5">
+                    <div class="col-6">
                         <input type="text" class="form-control" placeholder="First name">
                     </div>
-                    <div class="col-5">
+                    <div class="col-6">
                         <input type="text" class="form-control" placeholder="Last name">
                     </div>
                 </div>
@@ -128,12 +128,12 @@
                     <div class="col-7">
                         <input type="text" class="form-control" placeholder="Email">
                     </div>
-                    <div class="col-3" >
+                    <div class="col-5" >
                         <input type="text" class="form-control" placeholder="Contact Number">
                     </div>
                 </div>
                 <div class="form-row my-1">
-                    <div class="col-10">
+                    <div class="col-12">
                         <textarea class="form-control" style="resize: none" rows="4" placeholder="General Enquiry"></textarea>
                     </div>
                 </div>

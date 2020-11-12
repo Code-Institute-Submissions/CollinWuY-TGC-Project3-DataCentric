@@ -132,12 +132,11 @@ footer {
 }
 
 #footerWrapper {
-    height: 95%;
+    height: 100%;
     width: auto;
 }
 
 #footer-logo {
-    padding: 1rem 2rem 0;
     height: 100%;
     display: flex;
     flex: 1;
@@ -149,8 +148,8 @@ footer {
     letter-spacing: 0.25rem;
 }
 
+
 #footer-note {
-    padding: 2rem;
     height: 100%;
     display: flex;
     flex: 1;
@@ -164,6 +163,7 @@ footer {
     letter-spacing: 0.2rem;
     font-weight: 400;
     color:  rgba(137, 169, 194, 1);
+    width: 20rem;
 }
 
 #footer-contact {

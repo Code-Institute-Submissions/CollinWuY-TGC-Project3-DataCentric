@@ -11,7 +11,7 @@ $(document).ready(function(){
             success: function(res){
                 // console.log("ajax reply", res); // Testing Response
                 let bookData = JSON.parse(res);
-                console.log(bookData);
+                // console.log(bookData); // Testing JSON results
                 // console.log(bookData[0].category); // Testing Json access
                 var seenNames = {};
 
@@ -19,9 +19,8 @@ $(document).ready(function(){
                 list.innerHTML = ""
 
                 for (let i=0; i < bookData.length; i++){
-                    let newRow = `<li>${bookData[i].category}</li>`;
+                    let newRow = `<a href="/info/${bookData[i]._id.$oid}")}}"><li>${bookData[i].name}</li></a>`;
                     list.innerHTML += newRow
-
                 }
              
             }

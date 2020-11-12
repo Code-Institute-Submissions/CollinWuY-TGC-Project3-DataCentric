@@ -2,36 +2,33 @@
 {%block css%}
 <style>
 #createTitle h2 {
-  font-size: 3rem;
-  color: antiquewhite;
-  font-weight: bolder;
-  letter-spacing: 0.25rem;
-  margin: 0;
-  font-family: "Unica One", cursive;
-}
-
-#formContainer {
-    width: 50rem;
-    height: auto;
-    padding: 2rem;
-    background-color: rgba(22, 22, 29, 0.9);
-}
-
-label{
-    display: flex;
-    padding: 1rem 1rem;
-    margin-right: 0.5rem;
-    font-size: 1.25rem;
+    font-size: 3rem;
     color: antiquewhite;
     font-weight: bolder;
     letter-spacing: 0.25rem;
     margin: 0;
     font-family: "Unica One", cursive;
+    border-top: 4px solid rgba(137, 169, 194, 1);
+    border-bottom: 4px solid rgba(137, 169, 194, 1);
+}
+
+#formContainer {
+    width: auto;
+    height: auto;
+    background-color: rgba(22, 22, 29, 0.9);
+}
+
+label{
+    display: flex;
+    font-size: 1.25rem;
+    color: antiquewhite;
+    font-weight: bolder;
+    letter-spacing: 0.25rem;
+    font-family: "Unica One", cursive;
 }
 
 .form-group {
     justify-content: space-between;
-    padding:0 2rem;
 }
 
 small {
@@ -42,20 +39,16 @@ small {
   font-family: "Unica One", cursive;
 }
 
-#formComments{
-    padding: 2rem;
-}
-
 #ratings input {
   display: none;
-  width: 10rem;
+  width: auto;
 }
 
 #ratings label {
   font-size: 2rem;
   font-family: fontAwesome;
   color: antiquewhite;
-  padding: 0 1rem;
+  padding: 0 0.25rem;
   position: relative;
   transition: all 0.2 ease-in;
   text-shadow: 0 3px 6px darkgrey;
@@ -75,39 +68,60 @@ small {
   color: #fe7;
   text-shadow: 0 3px 6px #952;
 }
-
 </style>
 {%endblock%}
 
 {%block script%}
 <script>
-(function() {
-  'use strict';
-  window.addEventListener('load', function() {
-    var forms = document.getElementsByClassName('needs-validation');
-    var validation = Array.prototype.filter.call(forms, function(form) {
-      form.addEventListener('submit', function(event) {
-        if (form.checkValidity() === false) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, false);
-})();
+    (function() {
+    'use strict';
+    window.addEventListener('load', function() {
+        var forms = document.getElementsByClassName('needs-validation');
+        var validation = Array.prototype.filter.call(forms, function(form) {
+        form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+        }, false);
+        });
+    }, false);
+    })();
+
+ // Category Search Ajax Call to MongoDB
+    $('#bookCategory').on('change', function(e){
+        let bookCategory = $("#bookCategory").val();
+        console.log("Value:", bookCategory);
+        $.ajax({
+            method: "POST",
+            url: "/catsearch",
+            data: {text: bookCategory},
+            success: function(res){
+                let bookCategory = JSON.parse(res);
+                $("#bookAuthor").val(bookCategory[0].publisher);      
+            }
+        })
+    })
 </script>
 {%endblock%}
 
 {%block content%}
-<div class="container-fluid d-flex justify-content-center mx-auto my-5" id="createTitle">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p>{{msg}}<p>
+            {% endfor%}
+        {% endif %}
+    {% endwith %}
+<div class="container d-flex justify-content-center mx-auto my-5 text-center" id="createTitle">
     <h2> Send in a Review </h2>
 </div>
-<div class="container mb-5" id="formContainer">
+<div class="container mb-5 d-flex mx-auto flex-wrap justify-content-center align-content-center p-5" id="formContainer">
     <form method="POST" class="needs-validation" novalidate>
-        <div class="form-group form-inline row">
+        <div class="form-group form-inline row my-3" id="createForm">
             <label for="bookName">Book's Title: </label>
-            <input type="text" class="form-control col-7" id="bookName" placeholder="E.g. Dungeons and Dragons 5E PHB" name="bookName" required>
+            <input type="text" class="form-control col-md-6" id="bookName" placeholder="E.g. Dungeons and Dragons 5E PHB" name="bookName" required>
             <div class="valid-feedback">
                 Looks good!
             </div>
@@ -115,29 +129,26 @@ small {
                 Please enter the Book Title!
             </div>
         </div>
-          <div class="form-group form-inline row">
+        <div class="form-group form-inline row mb-1 pb-0 mt-3">
             <label for="bookCategory">Book's Series: </label>
-            <input type="text" class="form-control col-7" id="bookCategory" placeholder="E.g. Dungeons and Dragons / Call of Cthulhu" name="bookCategory" required>
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-            <div class="invalid-feedback">
-                Please enter the Book's Series!
-            </div>
+            <select class="form-control col-md-6" id="bookCategory" placeholder="E.g. Dungeons and Dragons / Call of Cthulhu" name="bookCategory" value="" required>
+                {% for cat in category_list%}
+                    <option>{{cat.name}}</option>
+                {% endfor %}
+            </select>
         </div>
-        <div class="form-group form-inline row">
-            <label for="bookAuthor">Book's Company: </label>
-            <input type="text" class="form-control col-7" id="bookAuthor" placeholder="E.g. Wizards of the Coast / Chaosium" name="bookAuthor" required>
-            <div class="valid-feedback">
-                Looks good!
-            </div>
-            <div class="invalid-feedback">
-                Please enter the Book's IP Company!
-            </div>
+        <small id="catHelpBlock" class="form-text text-center mb-3 mt-0">
+            If Series dont' exist, create new Category
+            <a href="{{url_for('show_create_category')}}" class="btn btn-primary btn-sm">Create Category</a>
+        </small>
+
+        <div class="form-group form-inline row my-3">
+            <label for="bookAuthor">Book's Publisher: </label>
+            <input type="text" class="form-control col-md-6" id="bookAuthor" placeholder="E.g. Wizards of the Coast / Chaosium" name="bookAuthor" readonly required>
         </div>
-        <div class="form-group form-inline row">
+        <div class="form-group form-inline row my-3">
             <label for="bookRelease_Date">Publish Year: </label>
-            <input type="number" step="1" class="form-control col-7" id="bookRelease_Date" placeholder="YYYY" name="bookRelease_Date" required>
+            <input type="number" step="1" class="form-control col-md-6" id="bookRelease_Date" placeholder="YYYY" name="bookRelease_Date" required>
             <div class="valid-feedback">
                 Looks good!
             </div>
@@ -145,9 +156,9 @@ small {
                 Enter a valid year it was published!
             </div>
         </div>
-        <div class="form-group form-inline row">
+        <div class="form-group form-inline row my-3">
             <label for="bookPrice">Book's Price: </label>
-            <input type="text" class="form-control col-7" id="bookPrice" placeholder="CUR $$.$$ format" name="bookPrice" required>
+            <input type="text" class="form-control col-md-6" id="bookPrice" placeholder="CUR $$.$$ format" name="bookPrice" required>
              <div class="valid-feedback">
                 Looks good!
             </div>
@@ -155,9 +166,9 @@ small {
                 Enter a price with format of CUR $$.$$ !
             </div>
         </div>
-        <div class="form-group row d-flex flex-column justify-content-center align-items-center mb-0">
+        <div class="form-group row d-flex flex-column justify-content-center align-items-center m-0 mt-4 text-center">
             <label for="bookImage">Book Cover Image Web Link: </label>
-            <input type="text" class="form-control col-11" id="bookImage" placeholder="Image Size: 600px by 400px .png .jpeg .jp .svg format" name="bookImage" required>
+            <input type="text" class="form-control p-0" id="bookImage" placeholder="Image Size: 600px by 400px .png .jpeg .jp .svg format" name="bookImage" required>
              <div class="valid-feedback">
                 Looks good!
             </div>
@@ -165,22 +176,22 @@ small {
                 Enter a valid https:// address!
             </div>
         </div>
-        <small id="imageHelpBlock" class="form-text text-center m-0">
+        <small id="imageHelpBlock" class="form-text text-center mb-4">
             If you need a hosting site, try www.cloudinary.com
         </small>
-        <div class="d-flex flex-column justify-content-center align-items-center mt-3" required>
+        <div class="d-flex flex-column justify-content-center align-items-center mt-4 mb-3">
             <label for="ratings">Book Rating: </label>
+            <div class="form-group row d-flex justify-content-center align-items-center flex-row-reverse custom-control custom-radio p-0 flex-shrink-1 flex-nowrap" id="ratings" required>
+                <input type="radio" name="rate" id="star5"  value="5" ><label for="star5" class="fas fa-star" ></label>
+                <input type="radio" name="rate" id="star4"  value="4" ><label for="star4" class="fas fa-star" ></label>
+                <input type="radio" name="rate" id="star3"  value="3" ><label for="star3" class="fas fa-star" ></label>
+                <input type="radio" name="rate" id="star2"  value="2" ><label for="star2" class="fas fa-star" ></label>
+                <input type="radio" name="rate" id="star1"  value="1" ><label for="star1" class="fas fa-star" ></label>
+            </div>
         </div>
-        <div class="form-group row d-flex justify-content-center align-items-center flex-row-reverse custom-control custom-radio" id="ratings">
-            <input type="radio" name="rate" id="star5"  value="5" ><label for="star5" class="fas fa-star" ></label>
-            <input type="radio" name="rate" id="star4"  value="4" ><label for="star4" class="fas fa-star" ></label>
-            <input type="radio" name="rate" id="star3"  value="3" ><label for="star3" class="fas fa-star" ></label>
-            <input type="radio" name="rate" id="star2"  value="2" ><label for="star2" class="fas fa-star" ></label>
-            <input type="radio" name="rate" id="star1"  value="1" ><label for="star1" class="fas fa-star" ></label>
-        </div>
-        <div class="form-group row d-flex flex-column justify-content-center align-items-center" id="formComments">
+        <div class="form-group row d-flex flex-column justify-content-center align-items-center mb-4 p-1" id="formComments" >
             <label for="bookComments">Comments: </label>
-            <textarea class="form-control col-10" id="bookComments" rows="4" maxlength="300" style="resize: none;" name="bookComments" required></textarea>
+            <textarea class="form-control" id="bookComments" rows="4" maxlength="300" style="resize: none;" name="bookComments" required></textarea>
             <div class="valid-feedback">
                 Looks good!
             </div>
@@ -188,8 +199,8 @@ small {
                 Enter a valid comments!
             </div>
         </div>
-        <div class="d-flex flex-column justify-content-center align-items-center mt-3" id="formSubmit">
-            <input type="submit" class="btn btn-primary">
+        <div class="d-flex flex-column justify-content-center align-items-center my-4 mx-0" id="formSubmit">
+            <input type="submit" class="btn btn-primary btn-lg" value="Post Review">
         </div>
     </form>
 </div>

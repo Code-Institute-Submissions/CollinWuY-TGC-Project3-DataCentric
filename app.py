@@ -36,10 +36,12 @@ def searchList():
 @app.route('/')
 def homepage():
     books = list(db.books.find().sort("reviews", -1))
-    top = books[:3]
+    new_books = list(db.books.find().sort("release_date", -1))
+    new = new_books[:3]
+    top = books[:6]
     search_list = searchList()
     # print(search_list)
-    return render_template('home.template.html',
+    return render_template('home.template.html', new=new,
                            books=books, search_list=search_list, top=top)
 
 
@@ -129,7 +131,8 @@ def process_create_form():
         "image": image
     }
     db.books.insert_one(new_book)
-    flash("New book review is created successfully!", "success")
+    flash(f"New book review {new_book['name']} has been ADDED successfully!",
+          "success")
     return redirect(url_for('show_books_in_category', book_category=category))
 
 
@@ -154,7 +157,8 @@ def process_create_category():
     }
 
     db.category.insert_one(new_cat)
-    flash("New book category is created successfully!", "success")
+    flash(f"New Series {new_cat['name']} has been ADDED successfully!",
+          "success")
     return redirect(url_for('show_create_form'))
 
 
@@ -171,8 +175,6 @@ def show_edit_book(book_id):
 
 @app.route('/edit/<book_id>', methods=["POST"])
 def process_edit_book(book_id):
-    search_list = searchList()
-    books = list(db.books.find().sort("reviews", -1))
     name = request.form.get('bookName')
     category = request.form.get('bookCategory')
     author = request.form.get('bookAuthor')
@@ -197,8 +199,11 @@ def process_edit_book(book_id):
             "image": image
         }
     })
-    return redirect(url_for('homepage'), search_list=search_list,
-                    books=books)
+
+    flash(f"{name}'s review has been UPDATED successfully!",
+          "success")
+
+    return redirect(url_for('show_book_info', book_id=ObjectId(book_id)))
 
 
 @app.route('/delete/<book_id>')
@@ -215,13 +220,13 @@ def show_delete_book(book_id):
 
 @app.route('/delete/<book_id>', methods=["POST"])
 def confirm_delete_book(book_id):
-    search_list = searchList()
-    books = list(db.books.find().sort("reviews", -1))
     db.books.remove({
         '_id': ObjectId(book_id)
     })
-    return redirect(url_for("homepage"), search_list=search_list,
-                    books=books)
+
+    flash("Book Review has been DELETED successfully!", "success")
+
+    return redirect(url_for("homepage"))
 
 
 # "magic code" -- boilerplate

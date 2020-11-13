@@ -9,23 +9,23 @@ $(document).ready(function(){
             url: "/livesearch",
             data: {text: searchValue},
             success: function(res){
-                // console.log("ajax reply", res); // Testing Response
                 let bookData = JSON.parse(res);
-                // console.log(bookData); // Testing JSON results
-                // console.log(bookData[0].category); // Testing Json access
                 var seenNames = {};
-
                 let list = document.getElementById('menu');
                 list.innerHTML = ""
-
                 for (let i=0; i < bookData.length; i++){
                     let newRow = `<a href="/info/${bookData[i]._id.$oid}")}}"><li>${bookData[i].name}</li></a>`;
                     list.innerHTML += newRow
-                }
-             
+                } 
             }
         })
     })
+    
+    $("#navbarCustom .nav-item").click(function(){
+        $('#navbarCustom .nav-item').removeClass('active');
+        $(this).addClass('active');
+    })
+
 
     $('#ratings').click(function(){
         ratingScore();

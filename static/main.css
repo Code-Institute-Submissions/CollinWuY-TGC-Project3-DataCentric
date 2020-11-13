@@ -34,7 +34,7 @@ nav {
     height: auto;
 }
 
-#navbarCustom .nav-link.active,
+.navbar-nav > .active > a,
 #navbarCustom .nav-link:hover {
   color: rgba(137, 169, 194, 1);
   background-color: rgba(22, 22, 29, 1);
@@ -48,10 +48,9 @@ nav {
   letter-spacing: 0.25rem;
 }
 
-
-#navbarCustom .nav-link .active {
+.navbar-nav > .active > a {
   color: aqua;
-  background-color: chartreuse;
+  background-color: chartreuse;    
 }
 
 .navbar-toggler{
@@ -192,4 +191,10 @@ footer {
 #social a img{
     height: 60px;
     width: 60px;
+}
+
+/* Moving Toastr Flash Message Position */
+#toast-container{
+    top: 12%;
+    color: antiquewhite;
 }

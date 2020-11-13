@@ -12,6 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Unica+One&display=swap" rel="stylesheet">
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Toastr Flashed Messages CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}" />
     {% block css %}{% endblock %}
@@ -23,28 +25,42 @@
 <body>
 <!-- Nav Bar -->
     <header class="container-fluid">
-        <nav class="navbar navbar-dark fixed-top navbar-expand-lg px-5 pt-1 pb-2" id="navbar">
+        <nav class="navbar navbar-dark fixed-top navbar-expand-lg px-5 pt-1 pb-2" id="navbar" role="navigatation">
             <a class="navbar-brand" href="{{url_for('homepage')}}"><img src="{{url_for('static', filename='TabletopLogo.png')}}" id="logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCustom" aria-controls="navbarCustom" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarCustom">
-                <div class="navbar-nav ml-auto">
-                <a class="nav-link active" href="{{ url_for('homepage') }}">Home <span class="sr-only">(current)</span></a>
+            <div class="navbar-nav collapse navbar-collapse" id="navbarCustom">
+                <a class="navbar-item nav-link ml-auto" href="{{ url_for('homepage') }}">Home<span class="sr-only">(current)</span></a> 
                 <div class="dropdown show">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Browse</a>
+                    <a class="navbar-item nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Browse</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         {%for book in search_list%}
-                            <a class="dropdown-item" href="{{url_for('show_books_in_category', book_category=book.category)}}">{{book.category}}</a>
+                        <a class="dropdown-item" href="{{url_for('show_books_in_category', book_category=book.category)}}">{{book.category}}</a>
                         {%endfor%}
                     </div>
                 </div>
-                <a class="nav-link" href="{{url_for('show_create_form')}}">Review</a>
-                <a class="nav-link" href="#">Login</a>
-                </div>
+                <a class="navbar-item nav-link" href="{{url_for('show_create_form')}}">New Review</a>
+                <a class="navbar-item nav-link" href="#">Login</a>   
             </div>
         </nav>
     </header>
+
+     <!-- Flashed Messages
+    {% with messages = get_flashed_messages(with_categories=true)%}
+        {% if messages%}
+            {%for category, message in messages %}
+                {%if category == "success" %}
+                    <div class="alet alert-sucess">{{message}}</div>
+                {%endif%}
+
+                {%if category == "error" %}
+                    <div class="alet alert-danger">{{message}}</div>
+                {%endif%}
+            {%endfor%}
+        {%endif%}
+    {%endwith%} -->
+
     <!-- Search Bar -->
     <section id="searchWrapper" style="background-image: url(/static/TabletopBanner.png)">
         <div class="container mt-4 py-3" id="searchBar">
@@ -148,6 +164,21 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    
+    <!-- Toastr Flash Messages -->
+    <script>
+        toastr.options.progressBar = true;
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                toastr.success("{{msg}}")
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    setTimeout(function(){$("#flashed").hide()},5000)
+    </script>
     {%block script%}{%endblock%}
 </body>
 

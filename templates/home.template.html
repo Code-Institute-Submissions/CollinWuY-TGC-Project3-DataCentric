@@ -48,6 +48,49 @@
         </div>
         {%endfor%}
     {%endif%}
+</div>
+
+<div class="container-fluid d-flex justify-content-center mx-auto my-5 text-center" id="newTitle">
+    <h2> Most Recent Releases Tabletop RPG Books Reviews</h2>
+</div>
+<div class="container d-flex flex-row justify-content-between my-5 flex-wrap">
+    {%if books|length > 0%}
+        {%for book in new %}
+            <div class="card flex-shrink-0 m-3" style="width: 18rem;">
+                <a href="{{url_for('show_book_info', book_id=book._id)}}"><img class="card-img-top" src="{{book.image}}" style="height: 400px;" alt="Card image cap"></a>
+                <div class="card-body">
+                    <h5 class="card-title">{{book.name}}</h5>
+                <div class="ratings">
+                {%if book.reviews == 5 %}
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                {% elif book.reviews == 4 %}
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                {% elif book.reviews == 3 %}
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                {% elif book.reviews == 2 %}
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                {% elif book.reviews == 1 %}
+                    <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                {% endif %}
+                    <p class="card-text rating-score">Rating: {{book.reviews}} / 5</p>
+                </div>
+                <div class="card-comments">
+                    <p class="card-text">{{book.comments}}</p>
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+    {%endif%}
 </div>       
 
 

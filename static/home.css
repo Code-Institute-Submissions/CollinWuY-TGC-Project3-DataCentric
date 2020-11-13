@@ -1,4 +1,5 @@
-#popularTitle h2 {
+#popularTitle h2,
+#newTitle h2 {
   font-size: 3rem;
   color: antiquewhite;
   font-weight: bolder;

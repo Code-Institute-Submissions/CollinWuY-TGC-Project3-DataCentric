@@ -68,12 +68,15 @@ def catsearch():
     # print(json_data)
     return json_data
 
+@app.route('/login', methods=["POST", "GET"])
+def show_login():
+    return render_template("login.template.html")
 
 @app.route('/category/<book_category>')
 def show_books_in_category(book_category):
     search_list = searchList()
     books = list(db.books.find().sort("reviews", -1))
-    category = db.category.aggregate([{
+    category = list(db.category.aggregate([{
         '$lookup': {
             'from': 'books',
             'localField': 'name',
@@ -82,9 +85,9 @@ def show_books_in_category(book_category):
         }}, {
         '$match': {
             "name": book_category
-        }}])
+        }}]))
     return render_template('show_category_books.template.html', books=books,
-                           cat=category, search_list=search_list)
+                           category=category, search_list=search_list)
 
 
 @app.route('/info/<book_id>')
@@ -143,6 +146,9 @@ def show_create_category():
     return render_template("create_category.template.html",
                            books=books, search_list=search_list)
 
+@app.route('/category')
+def show_category():
+    return render_template("show_category.template.html")
 
 @app.route('/category/create', methods=["POST"])
 def process_create_category():
@@ -166,11 +172,13 @@ def process_create_category():
 def show_edit_book(book_id):
     search_list = searchList()
     books = list(db.books.find().sort("reviews", -1))
+    category_list = db.category.find()
     book = db.books.find_one({
         '_id': ObjectId(book_id)
     })
     return render_template('edit_book.template.html', books=books,
-                           book=book, search_list=search_list)
+                           book=book, search_list=search_list,
+                           category_list=category_list)
 
 
 @app.route('/edit/<book_id>', methods=["POST"])

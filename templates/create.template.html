@@ -1,4 +1,5 @@
 {% extends 'base.template.html'%}
+{% block title%}New Review Submission{%endblock%}
 {%block css%}
 <style>
 #createTitle h2 {
@@ -73,23 +74,24 @@ small {
 
 {%block script%}
 <script>
+// Bootstrap4 form validation script
     (function() {
-    'use strict';
-    window.addEventListener('load', function() {
-        var forms = document.getElementsByClassName('needs-validation');
-        var validation = Array.prototype.filter.call(forms, function(form) {
-        form.addEventListener('submit', function(event) {
-            if (form.checkValidity() === false) {
-            event.preventDefault();
-            event.stopPropagation();
-            }
-            form.classList.add('was-validated');
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+            });
         }, false);
-        });
-    }, false);
     })();
 
- // Category Search Ajax Call to MongoDB
+    // Category Search Ajax Call to MongoDB
     $('#bookCategory').on('change', function(e){
         let bookCategory = $("#bookCategory").val();
         console.log("Value:", bookCategory);
@@ -107,13 +109,6 @@ small {
 {%endblock%}
 
 {%block content%}
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            {% for msg in messages %}
-                <p>{{msg}}<p>
-            {% endfor%}
-        {% endif %}
-    {% endwith %}
 <div class="container d-flex justify-content-center mx-auto my-5 text-center" id="createTitle">
     <h2> Send in a Review </h2>
 </div>
@@ -148,7 +143,7 @@ small {
         </div>
         <div class="form-group form-inline row my-3">
             <label for="bookRelease_Date">Publish Year: </label>
-            <input type="number" step="1" class="form-control col-md-6" id="bookRelease_Date" placeholder="YYYY" name="bookRelease_Date" required>
+            <input type="number" class="form-control col-md-6" id="bookRelease_Date" placeholder="YYYY" name="bookRelease_Date" required>
             <div class="valid-feedback">
                 Looks good!
             </div>
@@ -200,10 +195,9 @@ small {
             </div>
         </div>
         <div class="d-flex flex-column justify-content-center align-items-center my-4 mx-0" id="formSubmit">
-            <input type="submit" class="btn btn-primary btn-lg" value="Post Review">
+            <a href="{{url_for('homepage')}}" class="btn btn-success btn-lg col-md-7 mx-auto my-3">Cancel</a>
+            <input type="submit" class="btn btn-primary btn-lg col-md-7 mx-auto my-3" value="Post Review"> 
         </div>
     </form>
 </div>
-
-
 {%endblock%}

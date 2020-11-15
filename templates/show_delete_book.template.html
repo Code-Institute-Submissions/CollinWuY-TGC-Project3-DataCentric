@@ -1,32 +1,29 @@
 {% extends 'base.template.html' %}
-
+{% block title%}Deleting {{book.name}}{%endblock%}
 {% block css %} 
 <style>
-#deleteTitle h2{
-  font-size: 3rem;
-  color: antiquewhite;
-  font-weight: bolder;
-  letter-spacing: 0.25rem;
-  margin: 0;
-  font-family: "Unica One", cursive;
+#deleteTitle h3 {
+    font-size: 2rem;
+    font-weight: bolder;
+    letter-spacing: 0.25rem;
+    margin: 0;
+    font-family: "Unica One", cursive;
+    color: antiquewhite;
 }
-#popularTitle h2 {
-  font-size: 3rem;
-  color: antiquewhite;
-  font-weight: bolder;
-  letter-spacing: 0.25rem;
-  margin: 0;
-  font-family: "Unica One", cursive;
+
+#deleteTitle h2 {
+    font-size: 4rem;
+    font-weight: bolder;
+    letter-spacing: 0.25rem;
+    margin: 0;
+    font-family: "Unica One", cursive;
+    color: antiquewhite;
+    border-top: 4px solid rgba(137, 169, 194, 1);
+    border-bottom: 4px solid rgba(137, 169, 194, 1);
 }
 
 .fixcolor{
     color: #fd4;
-}
-
-
-.card-img-top:hover {
-    transition: all 0.3s ease-in-out;
-    transform: scale(1.2);
 }
 
 .card-body {
@@ -101,8 +98,10 @@
 {% endblock %}
 
 {% block content %} 
-<div class="container-fluid d-flex justify-content-center mx-auto my-5" id="deleteTitle">
-    <h2> DELETING {{book.name}} Review</h2><br>
+<div class="container d-flex flex-column justify-content-center align-items-center mx-auto my-5 text-center" id="deleteTitle">  
+    <h3 style="color: red; background-color: rgba(22, 22, 29, 1);">!!! DELTELING !!!</h3>
+    <h2>{{book.name}}</h2>
+    <h3>Review</h3>
 </div>
 <div class="container-fluid d-flex flex-row justify-content-center align-align-items-center my-5 flex-wrap">
             <div class="card flex-shrink-0 m-5" style="width: 18rem;">
@@ -143,7 +142,7 @@
                 <div class="alert alert-danger">
                     <p> Are you SURE you want to DELETE this {{book.name}} review ? </p>
                     <div class="containter">
-                        <a href="{{url_for('homepage')}}" class="btn btn-success">Cancel</a>
+                        <a href="{{url_for('show_book_info', book_id=book._id)}}" class="btn btn-success">Cancel</a>
                         <input type="submit" class="btn btn-danger" value="DELETE">
                     </div>
                 </div>

@@ -156,7 +156,8 @@ footer {
     justify-content: center;
 }
 
-#footer-note p{
+#footer-note p,
+#footer-support p{
     font-family: "Montserrat", sans-serif;
     font-size: 0.75rem;
     letter-spacing: 0.2rem;
@@ -165,7 +166,7 @@ footer {
     width: 20rem;
 }
 
-#footer-contact {
+#footer-support {
     height: 100%;
     display: flex;
     flex: 1;
@@ -176,7 +177,7 @@ footer {
     font-weight: bold;
 }
 
-#footer-contact h3, #footer-note h3{
+#footer-support h3, #footer-note h3{
     font-size: 1.5rem;
     color: antiquewhite;
     font-weight: bolder;
@@ -191,6 +192,11 @@ footer {
 #social a img{
     height: 60px;
     width: 60px;
+}
+
+#footer-support a img{
+    width: 240px;
+    height: auto;
 }
 
 /* Moving Toastr Flash Message Position */

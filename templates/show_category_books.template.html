@@ -1,5 +1,5 @@
 {% extends 'base.template.html' %}
-
+{%block title%}{%for title in category%}Books in {{title.name}}{%endfor%}{%endblock%}
 {% block css %}
 <link rel="stylesheet" href="{{url_for('static', filename='home.css')}}" />
 <style>
@@ -23,47 +23,46 @@
 {% block script %}{%endblock%}
 
 {%block content%}
-
-{%for category in cat%}
+{%for cat in category%}
 <div class="container d-flex justify-content-center mx-auto my-5 text-center" id="cateogryTitle">  
-    <h2> Books in <b>{{category.name}}</b> Category </h2>
+    <h2> Books in <b>{{cat.name}}</b> Category </h2>
 </div>
 <div class="container d-flex flex-row justify-content-around my-5 flex-wrap">
-            {%for book in category.books%}
-                <div class="card flex-shrink-0 m-3" style="width: 18rem;">
-                    <a href="{{url_for('show_book_info', book_id=book._id)}}"><img class="card-img-top" src="{{book.image}}" style="height: 400px;" alt="Card image cap"></a>
-                    <div class="card-body">
-                        <h5 class="card-title">{{book.name}}</h5>
-                    <div class="ratings">
-                    {%if book.reviews == 5 %}
-                        <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
-                        <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
-                        <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
-                        <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
-                        <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
-                    {% elif book.reviews == 4 %}
-                        <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
-                        <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
-                        <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
-                        <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
-                    {% elif book.reviews == 3 %}
-                        <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
-                        <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
-                        <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
-                    {% elif book.reviews == 2 %}
-                        <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
-                        <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
-                    {% elif book.reviews == 1 %}
-                        <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
-                    {% endif %}
-                        <p class="card-text rating-score">Rating: {{book.reviews}} / 5</p>
-                    </div>
-                    <div class="card-comments">
-                        <p class="card-text">{{book.comments}}</p>
-                    </div>
-                </div>
+    {%for book in cat.books%}
+        <div class="card flex-shrink-0 m-3" style="width: 18rem;">
+            <a href="{{url_for('show_book_info', book_id=book._id)}}"><img class="card-img-top" src="{{book.image}}" style="height: 400px;" alt="Card image cap"></a>
+            <div class="card-body">
+                <h5 class="card-title">{{book.name}}</h5>
+            <div class="ratings">
+            {%if book.reviews == 5 %}
+                <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+            {% elif book.reviews == 4 %}
+                <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+            {% elif book.reviews == 3 %}
+                <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+            {% elif book.reviews == 2 %}
+                <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+                <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+            {% elif book.reviews == 1 %}
+                <input type="radio" name="rate" class="star" ><label for="star" class="fas fa-star fixcolor"></label>
+            {% endif %}
+                <p class="card-text rating-score">Rating: {{book.reviews}} / 5</p>
             </div>
-          {%endfor%}
-</div>  
-{%endfor%}
+            <div class="card-comments">
+                <p class="card-text">{{book.comments}}</p>
+            </div>
+        </div>
+    </div>
+    {%endfor%}
+</div>
+{%endfor%} 
 {% endblock %}

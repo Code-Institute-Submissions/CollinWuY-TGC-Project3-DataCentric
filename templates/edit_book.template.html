@@ -1,4 +1,5 @@
 {% extends 'base.template.html'%}
+{% block title%}Editing {{book.name}}{%endblock%}
 {%block css%}
 <style>
 #createTitle h2 {
@@ -71,38 +72,105 @@ small {
 
 </style>
 {%endblock%}
-{%block script%}{%endblock%}
+{%block script%}
+<script>
+// Bootstrap4 form validation script
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            var forms = document.getElementsByClassName('needs-validation');
+            var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+            });
+        }, false);
+    })();
+
+    // Category Search Ajax Call to MongoDB
+    $('#bookCategory').on('change', function(e){
+        let bookCategory = $("#bookCategory").val();
+        console.log("Value:", bookCategory);
+        $.ajax({
+            method: "POST",
+            url: "/catsearch",
+            data: {text: bookCategory},
+            success: function(res){
+                let bookCategory = JSON.parse(res);
+                $("#bookAuthor").val(bookCategory[0].publisher);      
+            }
+        })
+    })
+</script>
+{%endblock%}
 {%block content%}
 <div class="container-fluid d-flex justify-content-center mx-auto my-5 text-center" id="createTitle">
     <h2> Edit {{book.name}} Review </h2>
 </div>
 <div class="container mb-5 d-flex mx-auto flex-wrap justify-content-center align-content-center p-5" id="formContainer">
-    <form method="POST">
-        <div class="form-group form-inline row my-3">
+    <form method="POST" class="needs-validation" novalidate>
+        <div class="form-group form-inline row my-3" id="createForm">
             <label for="bookName">Book's Title: </label>
-            <input type="text" class="form-control col-md-6" id="bookName" placeholder="E.g. Dungeons and Dragons 5E PHB" name="bookName" value="{{book.name}}">
+            <input type="text" class="form-control col-md-6" id="bookName" placeholder="E.g. Dungeons and Dragons 5E PHB" name="bookName" value="{{book.name}}" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Please enter the Book Title!
+            </div>
         </div>
-          <div class="form-group form-inline row">
+        <div class="form-group form-inline row mb-1 pb-0 mt-3">
             <label for="bookCategory">Book's Series: </label>
-            <input type="text" class="form-control col-md-6" id="bookCategory" placeholder="E.g. Dungeons and Dragons / Call of Cthulhu" name="bookCategory" value="{{book.category}}">
+            <select class="form-control col-md-6" id="bookCategory" placeholder="E.g. Dungeons and Dragons / Call of Cthulhu" name="bookCategory" value="{{book.category}}" required>
+                {% for cat in category_list%}
+                    <option>{{cat.name}}</option>
+                {% endfor %}
+            </select>
         </div>
-        <div class="form-group form-inline row">
-            <label for="bookAuthor">Book's Company: </label>
-            <input type="text" class="form-control col-md-6" id="bookAuthor" placeholder="E.g. Wizards of the Coast / Chaosium" name="bookAuthor" value="{{book.author}}">
+        <small id="catHelpBlock" class="form-text text-center mb-3 mt-0">
+            If Series dont' exist, create new Category
+            <a href="{{url_for('show_create_category')}}" class="btn btn-primary btn-sm">Create Category</a>
+        </small>
+
+        <div class="form-group form-inline row my-3">
+            <label for="bookAuthor">Book's Publisher: </label>
+            <input type="text" class="form-control col-md-6" id="bookAuthor" placeholder="E.g. Wizards of the Coast / Chaosium" name="bookAuthor" value="{{book.author}}" readonly required>
         </div>
-        <div class="form-group form-inline row">
+        <div class="form-group form-inline row my-3">
             <label for="bookRelease_Date">Publish Year: </label>
-            <input type="number" step="1" class="form-control col-md-6" id="bookRelease_Date" placeholder="YYYY" name="bookRelease_Date" value="{{book.release_date}}">
+            <input type="number" class="form-control col-md-6" id="bookRelease_Date" placeholder="YYYY" name="bookRelease_Date" value="{{book.release_date}}" required>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Enter a valid year it was published!
+            </div>
         </div>
-        <div class="form-group form-inline row">
+        <div class="form-group form-inline row my-3">
             <label for="bookPrice">Book's Price: </label>
-            <input type="text" class="form-control col-md-6" id="bookPrice" placeholder="CUR $$.$$ format" name="bookPrice" value="{{book.price}}">
+            <input type="text" class="form-control col-md-6" id="bookPrice" placeholder="CUR $$.$$ format" name="bookPrice" value="{{book.price}}" required>
+             <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Enter a price with format of CUR $$.$$ !
+            </div>
         </div>
-        <div class="form-group row d-flex flex-column justify-content-center align-items-center mb-0">
+        <div class="form-group row d-flex flex-column justify-content-center align-items-center m-0 mt-4 text-center">
             <label for="bookImage">Book Cover Image Web Link: </label>
-            <input type="text" class="form-control p-0" id="bookImage" placeholder="Image Size: 600px by 400px .png .jpeg .jp .svg format" name="bookImage" value="{{book.image}}">
+            <input type="text" class="form-control p-0" id="bookImage" placeholder="Image Size: 600px by 400px .png .jpeg .jp .svg format" name="bookImage" value="{{book.image}}" required>
+             <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Enter a valid https:// address!
+            </div>
         </div>
-        <small id="imageHelpBlock" class="form-text text-center m-0">
+        <small id="imageHelpBlock" class="form-text text-center mb-4">
             If you need a hosting site, try www.cloudinary.com
         </small>
         <div class="d-flex flex-column justify-content-center align-items-center mt-4 mb-3">
@@ -135,12 +203,19 @@ small {
                 <input type="radio" name="rate" id="star1" value="1"><label for="star1" class="fas fa-star"></label>
             {%endif%}
         </div>
-        <div class="form-group row d-flex flex-column justify-content-center align-items-center" id="formComments" >
+        <div class="form-group row d-flex flex-column justify-content-center align-items-center mb-4 p-1" id="formComments" >
             <label for="bookComments">Comments: </label>
-            <textarea class="form-control col-10" id="bookComments" rows="4" maxlength="300" style="resize: none;" name="bookComments">{{book.comments}}</textarea>
+            <textarea class="form-control" id="bookComments" rows="4" maxlength="300" style="resize: none;" name="bookComments" required>{{book.comments}}</textarea>
+            <div class="valid-feedback">
+                Looks good!
+            </div>
+            <div class="invalid-feedback">
+                Enter a valid comments!
+            </div>
         </div>
-        <div class="d-flex flex-column justify-content-center align-items-center mt-5" id="formSubmit">
-            <input type="submit" class="btn btn-primary" value="Submit New Edit">
+        <div class="d-flex flex-column justify-content-center align-items-center my-4 mx-0" id="formSubmit">
+            <a href="{{url_for('homepage')}}" class="btn btn-success btn-lg col-md-7 mx-auto my-3">Cancel</a>
+            <input type="submit" class="btn btn-primary btn-lg col-md-7 mx-auto my-3" value="Submit Changes"> 
         </div>
     </form>
 </div>

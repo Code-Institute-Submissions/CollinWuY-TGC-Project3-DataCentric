@@ -33,7 +33,7 @@
             <div class="navbar-nav collapse navbar-collapse" id="navbarCustom">
                 <a class="navbar-item nav-link ml-auto" href="{{ url_for('homepage') }}">Home<span class="sr-only">(current)</span></a> 
                 <div class="dropdown show">
-                    <a class="navbar-item nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Browse</a>
+                    <a class="navbar-item nav-link dropdown-toggle" href="{{url_for('show_category')}}" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Browse</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         {%for book in search_list%}
                         <a class="dropdown-item" href="{{url_for('show_books_in_category', book_category=book.category)}}">{{book.category}}</a>
@@ -113,45 +113,23 @@
                     <h3>Disclaimer</h3>
                 </div>
                 <div class="mx-auto my-3">
-                    <p> The webpage is a community webpage for all to input.
+                    <p class="pl-md-3"> The webpage is a community webpage for all to input.
                     Information here is non-offical and of the general consensus of the public.
                     We strive to support the table-top games RPG community in spreading awareness,
                     and information. Review ratings are solely at the discretion of the public. </p>
                 </div>
             </div>
 
-            <div class="container mx-auto pb-sm-5 mt-sm-5" id="footer-contact">
-                <form method="POST">  
-                    <div class="form-row d-flex justify-content-between">
-                        <div class="col-8 mr-2">
-                            <h3>Contact Us</h3>
-                        </div>
-                        <div class="col-3 text-right">
-                            <input type="submit" class="btn btn-primary btn-sm px-3" value="Enquire">
-                        </div>
-                    </div>                                
-                    <div class="form-row my-2">
-                        <div class="col-6">
-                            <input type="text" class="form-control" placeholder="First name">
-                        </div>
-                        <div class="col-6">
-                            <input type="text" class="form-control" placeholder="Last name">
-                        </div>
-                    </div>
-                    <div class="form-row my-1">
-                        <div class="col-7">
-                            <input type="text" class="form-control" placeholder="Email">
-                        </div>
-                        <div class="col-5" >
-                            <input type="text" class="form-control" placeholder="Contact Number">
-                        </div>
-                    </div>
-                    <div class="form-row my-1">
-                        <div class="col-12">
-                            <textarea class="form-control" style="resize: none" rows="4" placeholder="General Enquiry"></textarea>
-                        </div>
-                    </div>
-                </form>
+            <div class="container d-flex flex-column justify-content-center align-items-center flex-shrink-0 mx-auto mt-3" id="footer-support">
+                <div class="my-2">
+                    <h3>Support Us</h3>
+                </div>
+                <div class="my-2 text-center">
+                    <p>This site requires constant updating and maintenance. If this webpage has helped you, do kindly consider donating to our Patreon!</p>
+                </div>
+                <div class="mb-3">
+                    <a href="https://www.patreon.com/"><img src="{{url_for('static', filename='patreon-banner.png')}}"></a>
+                </div>                                
             </div>
         </div>
     </footer>

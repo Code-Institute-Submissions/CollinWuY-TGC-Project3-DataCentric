@@ -333,7 +333,6 @@ def process_edit_book(book_id):
                     "reviews": reviews,
                     "comments": comments,
                     "image": image,
-                    "created_by": created_by
                 }
             })
             flash(f"{name}'s review has been UPDATED successfully!",

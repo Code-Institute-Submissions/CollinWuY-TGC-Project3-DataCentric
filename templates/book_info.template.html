@@ -2,31 +2,6 @@
 {% block title%}{{book.name}} Information{%endblock%}
 {% block css %}
 <link rel="stylesheet" href="{{url_for('static', filename='book_info.css')}}" />
-<style>
-h4 {
-    font-size: 1rem;
-    font-weight: bolder;
-    letter-spacing: 0.25rem;
-    margin: 0;
-    font-family: "Unica One", cursive;
-    color: antiquewhite;
-    border-top: 4px solid rgba(137, 169, 194, 1);
-    border-bottom: 4px solid rgba(137, 169, 194, 1);
-}
-
-#infoBoard{
-    background:  rgba(22, 22, 29, 0.9);
-    border: 5px double antiquewhite;
-}
-
-#infoBoard p {
-    font-size: 0.75rem;
-    font-weight: bolder;
-    letter-spacing: 0.25rem;
-    font-family: "Montserrat", sans-serif;
-    color: rgba(137, 169, 194, 1);
-}
-</style>
 {%endblock%}
 
 {% block script %}{%endblock%}

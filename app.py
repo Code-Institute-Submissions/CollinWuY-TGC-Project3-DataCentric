@@ -1,4 +1,12 @@
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import (
+    Flask,
+    render_template,
+    request,
+    redirect,
+    url_for,
+    flash,
+    session,
+    )
 from dotenv import load_dotenv
 from bson.objectid import ObjectId
 from bson.json_util import dumps, loads
@@ -6,11 +14,9 @@ import pymongo
 import os
 
 load_dotenv()
-# print(os.environ.get("MONGO_URL")) #double check connection to MongoDB
 MONGO_URL = os.environ.get('MONGO_URL')
 DB_NAME = "tabletop_shop"
 
-# create the MongoClient first
 # Global Variables
 client = pymongo.MongoClient(MONGO_URL)
 db = client[DB_NAME]
@@ -55,24 +61,16 @@ def homepage():
 @app.route('/livesearch', methods=["POST", "GET"])
 def livesearch():
     query = request.form.get('text')
-    # print(query)
-    # data = db.books.find({"book_category": {"$regex": query}})
     data = db.books.find({'$text': {'$search': query}})
-    # print(data)
     json_data = dumps(data)
-    # print(json_data)
     return json_data
 
 
 @app.route('/catsearch', methods=["POST", "GET"])
 def catsearch():
     query = request.form.get('text')
-    # print(query)
-    # data = db.books.find({"book_category": {"$regex": query}})
     data = db.category.find({'$text': {'$search': query}})
-    # print(data)
     json_data = dumps(data)
-    # print(json_data)
     return json_data
 
 
@@ -82,10 +80,6 @@ def show_login():
     books = list(db.books.find().sort("reviews", -1))
     logged = loggedIn()
     users = list(db.users.find())
-    # print(users)
-    # for x in users:
-    #     print(x.get('email'))
-    #     print(x.get('_id'))
 
     if request.method == "POST":
         session.pop('user', None)
@@ -99,8 +93,6 @@ def show_login():
                         "user_id": str(user.get('_id')),
                         "user_name": user.get('name')
                     }
-                    # session['user_id'] = str(user.get('_id'))
-                    # session['user_name'] = (user.get('name'))
                     session['user'] = new_session
                     print(session)
                     flash('Successfully Logged In!')
@@ -222,20 +214,30 @@ def process_create_form():
     image = request.form.get('bookImage')
     reviews = request.form.getlist('rate')
     reviews = int(reviews[0])
+    if session.get('user') is not None:
+        created_by = session.get('user').get('user_id')
+        if created_by is not None:
+            new_book = {
+                "category": category,
+                "name": name,
+                "author": author,
+                "release_date": release_date,
+                "price": price,
+                "reviews": reviews,
+                "comments": comments,
+                "image": image,
+                "created_by": created_by
+            }
+            db.books.insert_one(new_book)
+            flash(f"New book review {new_book['name']}"
+                  f"has been ADDED successfully!", "success")
+        else:
+            flash('Kindly Log In to Post a New Review!', 'error')
+            return redirect(url_for('show_login'))
+    else:
+        flash('Kindly Log In to Post a New Review!', 'error')
+        return redirect(url_for('show_login'))
 
-    new_book = {
-        "category": category,
-        "name": name,
-        "author": author,
-        "release_date": release_date,
-        "price": price,
-        "reviews": reviews,
-        "comments": comments,
-        "image": image
-    }
-    db.books.insert_one(new_book)
-    flash(f"New book review {new_book['name']} has been ADDED successfully!",
-          "success")
     return redirect(url_for('show_books_in_category', book_category=category))
 
 
@@ -263,16 +265,25 @@ def process_create_category():
     name = request.form.get('catName')
     publisher = request.form.get('catPublisher')
     comments = request.form.get('catComments')
+    if session.get('user') is not None:
+        created_by = session.get('user').get('user_id')
+        if created_by is not None:
+            new_cat = {
+                "name": name,
+                "publisher": publisher,
+                "comments": comments,
+                "created_by": created_by
+            }
+            db.category.insert_one(new_cat)
+            flash(f"New Series {new_cat['name']}"
+                  f"has been ADDED successfully!", "success")
+        else:
+            flash('Kindly Log In to Post a New Review!', 'error')
+            return redirect(url_for('show_login'))
+    else:
+        flash('Kindly Log In to Post a New Review!', 'error')
+        return redirect(url_for('show_login'))
 
-    new_cat = {
-        "name": name,
-        "publisher": publisher,
-        "comments": comments,
-    }
-
-    db.category.insert_one(new_cat)
-    flash(f"New Series {new_cat['name']} has been ADDED successfully!",
-          "success")
     return redirect(url_for('show_create_form'))
 
 
@@ -302,23 +313,38 @@ def process_edit_book(book_id):
     reviews = request.form.getlist('rate')
     reviews = int(reviews[0])
 
-    db.books.update_one({
-        "_id": ObjectId(book_id)
-    }, {
-        '$set': {
-            "category": category,
-            "name": name,
-            "author": author,
-            "release_date": release_date,
-            "price": price,
-            "reviews": reviews,
-            "comments": comments,
-            "image": image
-        }
+    book = db.books.find_one({
+        '_id': ObjectId(book_id)
     })
+    book_creator = book.get('created_by')
 
-    flash(f"{name}'s review has been UPDATED successfully!",
-          "success")
+    if session.get('user') is not None:
+        created_by = session.get('user').get('user_id')
+        if created_by == book_creator or created_by == '5fb2044d1ced0cb6fd7d7b67':
+            db.books.update_one({
+                "_id": ObjectId(book_id)
+            }, {
+                '$set': {
+                    "category": category,
+                    "name": name,
+                    "author": author,
+                    "release_date": release_date,
+                    "price": price,
+                    "reviews": reviews,
+                    "comments": comments,
+                    "image": image,
+                    "created_by": created_by
+                }
+            })
+            flash(f"{name}'s review has been UPDATED successfully!",
+                  "success")
+        else:
+            flash("You are not the Original Poster!"
+                  "Log in Original Poster Account First!", 'error')
+            return redirect(url_for('show_login'))
+    else:
+        flash('Kindly Log In to Post a New Review!', 'error')
+        return redirect(url_for('show_login'))
 
     return redirect(url_for('show_book_info', book_id=ObjectId(book_id)))
 
@@ -339,12 +365,25 @@ def show_delete_book(book_id):
 
 @app.route('/delete/<book_id>', methods=["POST"])
 def confirm_delete_book(book_id):
-    db.books.remove({
+    book_to_delete = db.books.find_one({
         '_id': ObjectId(book_id)
     })
+    book_creator = book_to_delete.get("created_by")
 
-    flash("Book Review has been DELETED successfully!", "success")
-
+    if session.get('user') is not None:
+        created_by = session.get('user').get('user_id')
+        if created_by == book_creator or created_by == '5fb2044d1ced0cb6fd7d7b67':
+            db.books.remove({
+                '_id': ObjectId(book_id)
+            })
+            flash("Book Review has been DELETED successfully!", "success")
+        else:
+            flash("You are not the Original Poster!"
+                  "Log in Original Poster Account First!", 'error')
+            return redirect(url_for('show_login'))
+    else:
+        flash('Kindly Log In to Post a New Review!', 'error')
+        return redirect(url_for('show_login'))
     return redirect(url_for("homepage"))
 
 

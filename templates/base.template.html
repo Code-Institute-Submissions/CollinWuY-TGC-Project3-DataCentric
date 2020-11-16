@@ -11,7 +11,7 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Unica+One&display=swap" rel="stylesheet">
     <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <!-- Toastr Flashed Messages CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- Custom CSS -->
@@ -41,25 +41,10 @@
                     </div>
                 </div>
                 <a class="navbar-item nav-link" href="{{url_for('show_create_form')}}">New Review</a>
-                <a class="navbar-item nav-link" href="#">Login</a>   
+                <a class="navbar-item nav-link" id="login" href="{{url_for('show_login')}}">Login</a>   
             </div>
         </nav>
     </header>
-
-     <!-- Flashed Messages
-    {% with messages = get_flashed_messages(with_categories=true)%}
-        {% if messages%}
-            {%for category, message in messages %}
-                {%if category == "success" %}
-                    <div class="alet alert-sucess">{{message}}</div>
-                {%endif%}
-
-                {%if category == "error" %}
-                    <div class="alet alert-danger">{{message}}</div>
-                {%endif%}
-            {%endfor%}
-        {%endif%}
-    {%endwith%} -->
 
     <!-- Search Bar -->
     <section id="searchWrapper" style="background-image: url(/static/TabletopBanner.png)">
@@ -141,21 +126,35 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" integrity="sha512-F5QTlBqZlvuBEs9LQPqc1iZv2UMxcVXezbHzomzS6Df4MZMClge/8+gXrKw2fl5ysdk4rWjR0vKS7NNkfymaBQ==" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='main.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     
     <!-- Toastr Flash Messages -->
     <script>
         toastr.options.progressBar = true;
-    {% with messages = get_flashed_messages() %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-            {% for msg in messages %}
-                toastr.success("{{msg}}")
+            {% for category, msg in messages %}
+                {% if category == "error" %}
+                    toastr.error("{{msg}}")
+                {% else %}
+                    toastr.success("{{msg}}")
+                {% endif %}
             {% endfor %}
         {% endif %}
     {% endwith %}
 
     setTimeout(function(){$("#flashed").hide()},5000)
+    
+    var logIn = ['{{logged}}']
+    if(logIn != 'None'){
+            $('#login').html('{{logged}}');
+            $("#login").attr("href", "{{url_for('show_logout')}}");
+            $('#login').css('font-size', '1.5rem');
+    }else{
+        $('#login').html('Log In');
+    }
+    
     </script>
     {%block script%}{%endblock%}
 </body>

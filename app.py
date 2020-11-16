@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from dotenv import load_dotenv
 from bson.objectid import ObjectId
 from bson.json_util import dumps, loads
@@ -33,6 +33,12 @@ def searchList():
     return search_list
 
 
+def loggedIn():
+    if not session.get("user_id") is None:
+        logged = session.get("user_name")
+        return logged
+
+
 @app.route('/')
 def homepage():
     books = list(db.books.find().sort("reviews", -1))
@@ -40,8 +46,9 @@ def homepage():
     new = new_books[:3]
     top = books[:6]
     search_list = searchList()
-    # print(search_list)
-    return render_template('home.template.html', new=new,
+    logged = loggedIn()
+
+    return render_template('home.template.html', new=new, logged=logged,
                            books=books, search_list=search_list, top=top)
 
 
@@ -68,14 +75,94 @@ def catsearch():
     # print(json_data)
     return json_data
 
+
 @app.route('/login', methods=["POST", "GET"])
 def show_login():
-    return render_template("login.template.html")
+    search_list = searchList()
+    books = list(db.books.find().sort("reviews", -1))
+    users = list(db.users.find())
+    logged = loggedIn()
+    print(users)
+    for x in users:
+        print(x.get('email'))
+        print(x.get('_id'))
+
+    if request.method == "POST":
+        session.pop('user_id', None)
+        userEmail = request.form.get("userEmail")
+        userPassword = request.form.get("userPassword")
+
+        for user in users:
+            if user.get('email') == userEmail:
+                if user.get('password') == userPassword:
+                    session['user_id'] = str(user.get('_id'))
+                    session['user_name'] = (user.get('name'))
+                    print(session)
+                    flash('Successfully Logged In!')
+                    return redirect(url_for('homepage'))
+                else:
+                    flash('Invalid User Email/Password! Try again!', 'error')
+                    return redirect(url_for('show_login'))
+
+    return render_template("login.template.html", books=books,
+                           search_list=search_list, logged=logged)
+
+@app.route('/logout')
+def show_logout():
+    return render_template("logout.template.html")
+
+@app.route('/logout', methods=["POST"])
+def process_logout():
+    session.pop('user_id', None)
+    session.pop('user_name', None)
+    return redirect(url_for('homepage'))
+
+
+
+@app.route('/register')
+def show_register():
+    search_list = searchList()
+    books = list(db.books.find().sort("reviews", -1))
+    logged = loggedIn()
+    return render_template('registration.template.html', books=books,
+                           search_list=search_list, logged=logged)
+
+
+@app.route('/register', methods=["POST"])
+def process_register():
+    user_name = request.form.get('userName')
+    user_email = request.form.get('userEmail')
+    user_password = request.form.get('userPassword')
+    TNC, mailing = False, False
+    if request.form.getlist("TNC"):
+        TNC = True
+    if request.form.getlist("mailingList"):
+        mailing = True
+
+        new_mailing = {
+            "name": user_name,
+            "email": user_email
+        }
+
+        db.mailing_list.insert_one(new_mailing)
+
+    new_user = {
+        "name": user_name,
+        "email": user_email,
+        "password": user_password,
+        "TNC": TNC,
+        "mailing": mailing
+    }
+
+    db.users.insert_one(new_user)
+    return redirect(url_for('show_login'))
+
 
 @app.route('/category/<book_category>')
 def show_books_in_category(book_category):
     search_list = searchList()
     books = list(db.books.find().sort("reviews", -1))
+    logged = loggedIn()
     category = list(db.category.aggregate([{
         '$lookup': {
             'from': 'books',
@@ -87,18 +174,21 @@ def show_books_in_category(book_category):
             "name": book_category
         }}]))
     return render_template('show_category_books.template.html', books=books,
-                           category=category, search_list=search_list)
+                           category=category, search_list=search_list,
+                           logged=logged)
 
 
 @app.route('/info/<book_id>')
 def show_book_info(book_id):
     search_list = searchList()
     books = list(db.books.find().sort("reviews", -1))
+    logged = loggedIn()
     book = db.books.find_one({
         '_id': ObjectId(book_id)
     })
     return render_template('book_info.template.html', book=book,
-                           search_list=search_list, books=books)
+                           search_list=search_list, books=books,
+                           logged=logged)
 
 
 @app.route('/create')
@@ -106,8 +196,9 @@ def show_create_form():
     search_list = searchList()
     books = list(db.books.find().sort("reviews", -1))
     category_list = db.category.find()
+    logged = loggedIn()
     return render_template("create.template.html", books=books,
-                           search_list=search_list,
+                           search_list=search_list, logged=logged,
                            category_list=category_list)
 
 
@@ -143,12 +234,18 @@ def process_create_form():
 def show_create_category():
     search_list = searchList()
     books = list(db.books.find().sort("reviews", -1))
+    logged = loggedIn()
     return render_template("create_category.template.html",
-                           books=books, search_list=search_list)
+                           books=books, search_list=search_list,
+                           logged=logged)
+
 
 @app.route('/category')
 def show_category():
     return render_template("show_category.template.html")
+
+
+
 
 @app.route('/category/create', methods=["POST"])
 def process_create_category():

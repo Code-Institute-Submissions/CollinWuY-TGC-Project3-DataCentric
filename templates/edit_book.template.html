@@ -40,12 +40,12 @@ small {
   font-family: "Unica One", cursive;
 }
 
-#ratings input {
+.ratings input {
   display: none;
   width: auto;
 }
 
-#ratings label {
+.ratings label {
   font-size: 2rem;
   font-family: fontAwesome;
   color: antiquewhite;
@@ -56,16 +56,16 @@ small {
 }
 
 
-#ratings input:not(:checked) ~ label:hover,
-#ratings input:not(:checked) ~ label:hover ~ label {
+.ratings input:not(:checked) ~ label:hover,
+.ratings input:not(:checked) ~ label:hover ~ label {
   color: #fd4;
 }
 
-#ratings input:checked ~ label {
+.ratings input:checked ~ label {
   color: #fd4;
-} */
+} 
 
-#ratings input#star5-0:checked ~ label {
+.ratings input#star5-0:checked ~ label {
   color: #fe7;
   text-shadow: 0 3px 6px #952;
 }
@@ -176,7 +176,7 @@ small {
         <div class="d-flex flex-column justify-content-center align-items-center mt-4 mb-3">
             <label for="ratings">Book Rating: </label>
         </div>
-        <div class="form-group row d-flex justify-content-center align-items-center flex-row-reverse custom-control custom-radio p-0 flex-shrink-1 flex-nowrap" id="ratings">
+        <div class="ratings form-group row d-flex justify-content-center align-items-center flex-row-reverse custom-control custom-radio p-0 flex-shrink-1 flex-nowrap" name="ratings">
             {%if book.reviews == 5 %}
                 <input type="radio" name="rate" id="star5" value="5" checked><label for="star5" class="fas fa-star"></label>
             {%else %}
@@ -214,8 +214,8 @@ small {
             </div>
         </div>
         <div class="d-flex flex-column justify-content-center align-items-center my-4 mx-0" id="formSubmit">
-            <a href="{{url_for('homepage')}}" class="btn btn-success btn-lg col-md-7 mx-auto my-3">Cancel</a>
-            <input type="submit" class="btn btn-primary btn-lg col-md-7 mx-auto my-3" value="Submit Changes"> 
+            <input type="submit" class="btn btn-primary btn-lg col-md-5 mx-auto my-3" value="Submit Changes">
+            <a href="{{url_for('homepage')}}" class="btn btn-success btn-sm col-md-2 mx-auto mt-5">Cancel</a> 
         </div>
     </form>
 </div>

@@ -34,9 +34,9 @@ def searchList():
 
 
 def loggedIn():
-    if not session.get("user_id") is None:
-        logged = session.get("user_name")
-        return logged
+    if not session.get("user") is None:
+        logged_name = session.get("user").get('user_name')
+        return logged_name
 
 
 @app.route('/')
@@ -80,23 +80,28 @@ def catsearch():
 def show_login():
     search_list = searchList()
     books = list(db.books.find().sort("reviews", -1))
-    users = list(db.users.find())
     logged = loggedIn()
-    print(users)
-    for x in users:
-        print(x.get('email'))
-        print(x.get('_id'))
+    users = list(db.users.find())
+    # print(users)
+    # for x in users:
+    #     print(x.get('email'))
+    #     print(x.get('_id'))
 
     if request.method == "POST":
-        session.pop('user_id', None)
+        session.pop('user', None)
         userEmail = request.form.get("userEmail")
         userPassword = request.form.get("userPassword")
 
         for user in users:
             if user.get('email') == userEmail:
                 if user.get('password') == userPassword:
-                    session['user_id'] = str(user.get('_id'))
-                    session['user_name'] = (user.get('name'))
+                    new_session = {
+                        "user_id": str(user.get('_id')),
+                        "user_name": user.get('name')
+                    }
+                    # session['user_id'] = str(user.get('_id'))
+                    # session['user_name'] = (user.get('name'))
+                    session['user'] = new_session
                     print(session)
                     flash('Successfully Logged In!')
                     return redirect(url_for('homepage'))
@@ -107,16 +112,20 @@ def show_login():
     return render_template("login.template.html", books=books,
                            search_list=search_list, logged=logged)
 
+
 @app.route('/logout')
 def show_logout():
-    return render_template("logout.template.html")
+    search_list = searchList()
+    books = list(db.books.find().sort("reviews", -1))
+    logged = loggedIn()
+    return render_template("logout.template.html", search_list=search_list,
+                           books=books, logged=logged)
+
 
 @app.route('/logout', methods=["POST"])
 def process_logout():
-    session.pop('user_id', None)
-    session.pop('user_name', None)
+    session.pop('user', None)
     return redirect(url_for('homepage'))
-
 
 
 @app.route('/register')
@@ -195,8 +204,8 @@ def show_book_info(book_id):
 def show_create_form():
     search_list = searchList()
     books = list(db.books.find().sort("reviews", -1))
-    category_list = db.category.find()
     logged = loggedIn()
+    category_list = db.category.find()
     return render_template("create.template.html", books=books,
                            search_list=search_list, logged=logged,
                            category_list=category_list)
@@ -242,9 +251,11 @@ def show_create_category():
 
 @app.route('/category')
 def show_category():
-    return render_template("show_category.template.html")
-
-
+    search_list = searchList()
+    books = list(db.books.find().sort("reviews", -1))
+    logged = loggedIn()
+    return render_template("show_category.template.html", books=books,
+                           search_list=search_list, logged=logged)
 
 
 @app.route('/category/create', methods=["POST"])
@@ -269,13 +280,14 @@ def process_create_category():
 def show_edit_book(book_id):
     search_list = searchList()
     books = list(db.books.find().sort("reviews", -1))
+    logged = loggedIn()
     category_list = db.category.find()
     book = db.books.find_one({
         '_id': ObjectId(book_id)
     })
     return render_template('edit_book.template.html', books=books,
                            book=book, search_list=search_list,
-                           category_list=category_list)
+                           category_list=category_list, logged=logged)
 
 
 @app.route('/edit/<book_id>', methods=["POST"])
@@ -315,12 +327,14 @@ def process_edit_book(book_id):
 def show_delete_book(book_id):
     search_list = searchList()
     books = list(db.books.find().sort("reviews", -1))
+    logged = loggedIn()
     book_to_delete = db.books.find_one({
         '_id': ObjectId(book_id)
     })
 
     return render_template('show_delete_book.template.html', books=books,
-                           book=book_to_delete, search_list=search_list)
+                           book=book_to_delete, search_list=search_list,
+                           logged=logged)
 
 
 @app.route('/delete/<book_id>', methods=["POST"])

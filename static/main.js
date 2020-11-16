@@ -27,7 +27,7 @@ $(document).ready(function(){
     })
 
 
-    $('#ratings').click(function(){
+    $('.ratings').click(function(){
         ratingScore();
     })
 

@@ -11,11 +11,6 @@
   padding: 0.25rem;
 }
 
-.fixcolor{
-    color: #fd4;
-}
-
-
 .card:hover {
     transition: all 0.3s ease-in-out;
     transform: scale(1.2);
@@ -55,8 +50,12 @@
   width: 10rem;
 }
 
-.ratings label {
-  font-size: 1.5rem;
+/* .fixcolor{
+    color: #fd4;
+} */
+
+.ratings label{
+  font-size: 1.75rem;
   font-family: fontAwesome;
   color: antiquewhite;
   padding: 0.2rem;

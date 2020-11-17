@@ -1,0 +1,27 @@
+/* Logout Title CSS */
+#userLogOut h2 {
+    font-size: 3rem;
+    color: antiquewhite;
+    font-weight: bolder;
+    letter-spacing: 0.25rem;
+    margin: 0;
+    font-family: "Unica One", cursive;
+    border-top: 4px solid rgba(137, 169, 194, 1);
+    border-bottom: 4px solid rgba(137, 169, 194, 1);
+}
+
+/* Logout Display CSS */
+#logOutContainer {
+    width: auto;
+    height: auto;
+    background-color: rgba(22, 22, 29, 0.9);
+}
+
+label{
+    display: flex;
+    font-size: 1.25rem;
+    color: antiquewhite;
+    font-weight: bolder;
+    letter-spacing: 0.25rem;
+    font-family: "Unica One", cursive;
+}

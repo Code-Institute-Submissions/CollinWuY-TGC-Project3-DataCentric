@@ -1,110 +1,11 @@
 {% extends 'base.template.html'%}
 {% block title%}New Review Submission{%endblock%}
 {%block css%}
-<style>
-#createTitle h2 {
-    font-size: 3rem;
-    color: antiquewhite;
-    font-weight: bolder;
-    letter-spacing: 0.25rem;
-    margin: 0;
-    font-family: "Unica One", cursive;
-    border-top: 4px solid rgba(137, 169, 194, 1);
-    border-bottom: 4px solid rgba(137, 169, 194, 1);
-}
-
-#formContainer {
-    width: auto;
-    height: auto;
-    background-color: rgba(22, 22, 29, 0.9);
-}
-
-label{
-    display: flex;
-    font-size: 1.25rem;
-    color: antiquewhite;
-    font-weight: bolder;
-    letter-spacing: 0.25rem;
-    font-family: "Unica One", cursive;
-}
-
-.form-group {
-    justify-content: space-between;
-}
-
-small {
-  color: antiquewhite;
-  font-weight: bolder;
-  letter-spacing: 0.25rem;
-  margin: 0;
-  font-family: "Unica One", cursive;
-}
-
-.ratings input {
-  display: none;
-  width: auto;
-}
-
-.ratings label {
-  font-size: 2rem;
-  font-family: fontAwesome;
-  color: antiquewhite;
-  padding: 0 0.25rem;
-  position: relative;
-  transition: all 0.2 ease-in;
-  text-shadow: 0 3px 6px darkgrey;
-}
-
-.ratings input:not(:checked) ~ label:hover,
-.ratings input:not(:checked) ~ label:hover ~ label {
-  color: #fd4;
-}
-
-.ratings input:checked ~ label {
-  color: #fd4;
-} 
-
-.ratings input#star5-0:checked ~ label {
-  color: #fe7;
-  text-shadow: 0 3px 6px #952;
-}
-</style>
+<link rel="stylesheet" href="{{url_for('static', filename='create_book.css')}}" />
 {%endblock%}
-
 {%block script%}
-<script>
-// Bootstrap4 form validation script
-    (function() {
-        'use strict';
-        window.addEventListener('load', function() {
-            var forms = document.getElementsByClassName('needs-validation');
-            var validation = Array.prototype.filter.call(forms, function(form) {
-            form.addEventListener('submit', function(event) {
-                if (form.checkValidity() === false) {
-                event.preventDefault();
-                event.stopPropagation();
-                }
-                form.classList.add('was-validated');
-            }, false);
-            });
-        }, false);
-    })();
-
-    // Category Search Ajax Call to MongoDB
-    $('#bookCategory').on('change', function(e){
-        let bookCategory = $("#bookCategory").val();
-        console.log("Value:", bookCategory);
-        $.ajax({
-            method: "POST",
-            url: "/catsearch",
-            data: {text: bookCategory},
-            success: function(res){
-                let bookCategory = JSON.parse(res);
-                $("#bookAuthor").val(bookCategory[0].publisher);      
-            }
-        })
-    })
-</script>
+<script type="text/javascript" src="{{ url_for('static', filename='/js/bs4_form_validation.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='/js/category_search.js') }}"></script>
 {%endblock%}
 
 {%block content%}

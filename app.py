@@ -6,10 +6,10 @@ from flask import (
     url_for,
     flash,
     session,
-    )
+)
 from dotenv import load_dotenv
 from bson.objectid import ObjectId
-from bson.json_util import dumps, loads
+from bson.json_util import dumps
 import pymongo
 import os
 
@@ -320,7 +320,8 @@ def process_edit_book(book_id):
 
     if session.get('user') is not None:
         created_by = session.get('user').get('user_id')
-        if created_by == book_creator or created_by == '5fb2044d1ced0cb6fd7d7b67':
+        if (created_by == book_creator or
+                created_by == '5fb2044d1ced0cb6fd7d7b67'):
             db.books.update_one({
                 "_id": ObjectId(book_id)
             }, {
@@ -371,7 +372,8 @@ def confirm_delete_book(book_id):
 
     if session.get('user') is not None:
         created_by = session.get('user').get('user_id')
-        if created_by == book_creator or created_by == '5fb2044d1ced0cb6fd7d7b67':
+        if (created_by == book_creator or
+                created_by == '5fb2044d1ced0cb6fd7d7b67'):
             db.books.remove({
                 '_id': ObjectId(book_id)
             })

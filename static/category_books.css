@@ -1,0 +1,16 @@
+/* Show Books in Category Title CSS */
+#cateogryTitle h2{
+    font-size: 2rem;
+    color: antiquewhite;
+    font-weight: bolder;
+    letter-spacing: 0.25rem;
+    margin: 0;
+    font-family: "Unica One", cursive;
+}
+
+#cateogryTitle h2 b{
+    font-size: 4rem;
+    color: rgba(137, 169, 194, 1);
+    border-top: 4px solid antiquewhite;
+    border-bottom: 4px solid antiquewhite;
+}

@@ -66,7 +66,7 @@ nav {
 
 /* Search Bar CSS */
 #searchWrapper {
-  background-repeat: none;
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: top;
   height: auto;

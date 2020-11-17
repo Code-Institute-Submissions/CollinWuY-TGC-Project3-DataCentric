@@ -33,7 +33,7 @@
             <div class="navbar-nav collapse navbar-collapse" id="navbarCustom">
                 <a class="navbar-item nav-link ml-auto" href="{{ url_for('homepage') }}">Home<span class="sr-only">(current)</span></a> 
                 <div class="dropdown show">
-                    <a class="navbar-item nav-link dropdown-toggle" href="{{url_for('show_category')}}" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Browse</a>
+                    <a class="navbar-item nav-link dropdown-toggle" href="{{url_for('homepage')}}" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Browse</a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         {%for book in search_list%}
                         <a class="dropdown-item" href="{{url_for('show_books_in_category', book_category=book.category)}}">{{book.category}}</a>

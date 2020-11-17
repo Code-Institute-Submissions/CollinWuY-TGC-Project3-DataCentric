@@ -85,7 +85,7 @@ nav {
   box-shadow: 2px 6px 8px  rgba(22, 22, 29, 1);
 }
 
-#searchLabel h6{
+#searchLabel {
   font-size: 0.8rem;
   color: antiquewhite;
   font-weight: bolder;

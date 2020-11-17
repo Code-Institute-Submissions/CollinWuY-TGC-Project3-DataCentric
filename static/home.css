@@ -5,7 +5,7 @@
   font-weight: bolder;
   letter-spacing: 0.25rem;
   margin: 0;
-  font-family: "Unica One", cursive;
+  font-family: 'MedievalSharp', cursive;
   border-top: 8px double rgba(137, 169, 194, 1);
   border-bottom: 8px double rgba(137, 169, 194, 1);
   padding: 0.25rem;
@@ -30,11 +30,12 @@
     font-weight: bolder;
     letter-spacing: 0.25rem;
     margin: 0;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'MedievalSharp', cursive;
     flex: 1;
     text-align: center;
 }
 
+/* Rating Stars CSS */
 .ratings {
   display: flex;
   align-items: center;
@@ -49,10 +50,6 @@
   display: none;
   width: 10rem;
 }
-
-/* .fixcolor{
-    color: #fd4;
-} */
 
 .ratings label{
   font-size: 1.75rem;
@@ -71,7 +68,7 @@
     padding: 0 0.5rem 0 0;
     flex-direction: column;
     color: rgba(137, 169, 194, 1);
-    font-family: "Unica One", cursive;
+    font-family: 'MedievalSharp', cursive;
     font-weight: bolder;
     letter-spacing: 0.25rem;
     margin: 0;
@@ -82,8 +79,8 @@
     flex: 1;
     font-size: 0.75rem;
     color: rgba(137, 169, 194, 1);
-    font-weight: bold;
-    letter-spacing: 0.25rem;
+    font-weight: 300;
+    letter-spacing: 0.35rem;
     margin: 0;
     font-family: "Montserrat", sans-serif;
 }

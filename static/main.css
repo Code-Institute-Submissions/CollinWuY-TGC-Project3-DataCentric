@@ -7,10 +7,10 @@ body {
   margin: 0;
   padding: 0;
   outline: 0;
-  background-image: url(/static/images/bodywood.jpg);
-  background-repeat: no-repeat;
+  background: url(/static/images/Black_Wood.jpg);
+  background-repeat: repeat-y;
   background-position: center;
-  background-size: cover;
+  background-size: contain;
 }
 
 
@@ -24,7 +24,7 @@ nav {
     font-size: 0.85rem;
     color:  rgba(22, 22, 29, 1);
     font-weight: bolder;
-    font-family: "Unica One", cursive;
+    font-family: 'MedievalSharp', cursive;
     letter-spacing: 0.25rem;
 }
 
@@ -46,7 +46,7 @@ nav {
   font-size: 1.2rem;
   color: antiquewhite;
   font-weight: bolder;
-  font-family: "Unica One", cursive;
+  font-family: 'MedievalSharp', cursive;
   letter-spacing: 0.25rem;
 }
 
@@ -66,15 +66,19 @@ nav {
 
 /* Search Bar CSS */
 #searchWrapper {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: top;
-  height: auto;
-  width: 100%;
-  padding-top: 8rem;
-  padding-bottom: 2rem;
-  border-bottom: solid 1rem rgba(22, 22, 29, 0.9);
+    background: linear-gradient(0deg, rgba(43, 29, 30, 0.6), rgba(43, 29, 30, 0.6)),
+                url(/static/images/TabletopBanner.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+    height: auto;
+    width: 100%;
+    padding-top: 8rem;
+    padding-bottom: 2rem;
+    border-bottom: solid 1rem rgba(22, 22, 29, 0.9);
 }
+
+#searchWrapper
 
 #searchBar {
     background-color: rgba(22, 22, 29, 0.9);
@@ -86,10 +90,10 @@ nav {
 }
 
 #searchLabel {
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   color: antiquewhite;
   font-weight: bolder;
-  font-family: "Unica One", cursive;
+  font-family: 'MedievalSharp', cursive;
   letter-spacing: 0.25rem;
 }
 
@@ -101,7 +105,18 @@ nav {
   padding: 0;
   height: auto;
   flex-wrap: wrap;
-  border-radius: 0.75rem;
+  border-radius: 0.85rem;
+}
+
+#menu label {
+    font-size: 0.75rem;
+    font-family: 'MedievalSharp', cursive;
+    letter-spacing: 0.25rem;
+    font-weight: bolder;
+    color: black;
+    z-index: 1;
+    width: 100%;
+    padding-left: 2rem;
 }
 
 #menu li {
@@ -110,7 +125,7 @@ nav {
   background-color: rgba(137, 169, 194, 1);
   padding: 1rem 1rem;
   box-shadow: 0 6px 8px  rgba(22, 22, 29, 1);
-  font-family: "Montserrat", sans-serif;
+  font-family: 'MedievalSharp', cursive;
   font-size: 0.85rem;
   color: rgba(22, 22, 29, 1);
   letter-spacing: 0.2rem;
@@ -151,7 +166,7 @@ footer {
     flex: 1;
     align-items: center;
     justify-content: center;
-    font-family: "Unica One", cursive;
+    font-family: 'MedievalSharp', cursive;
     color: antiquewhite;
     font-weight: bolder;
     letter-spacing: 0.25rem;
@@ -182,7 +197,7 @@ footer {
     flex: 1;
     justify-content: center;
     flex-direction: column;
-    font-family: "Unica One", cursive;
+    font-family: 'MedievalSharp', cursive;
     font-weight: bold;
 }
 
@@ -192,7 +207,7 @@ footer {
     font-weight: bolder;
     letter-spacing: 0.25rem;
     margin: 0;
-    font-family: "Unica One", cursive;
+    font-family: 'MedievalSharp', cursive;
 }
 #footerAddress {
     font-size: 0.75rem;

@@ -230,7 +230,7 @@ def process_create_form():
             }
             db.books.insert_one(new_book)
             flash(f"New book review {new_book['name']}"
-                  f"has been ADDED successfully!", "success")
+                  f" has been ADDED successfully!", "success")
         else:
             flash('Kindly Log In to Post a New Review!', 'error')
             return redirect(url_for('show_login'))

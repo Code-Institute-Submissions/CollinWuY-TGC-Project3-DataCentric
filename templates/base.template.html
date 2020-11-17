@@ -10,7 +10,8 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Unica+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Montserrat:wght@500&display=swap" rel="stylesheet">
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Toastr Flashed Messages CSS -->
@@ -47,11 +48,12 @@
     </header>
 
 <!-- Search Bar -->
-    <section id="searchWrapper" style="background-image: url(/static/images/TabletopBanner.png);">
+    <section id="searchWrapper">
         <div class="container mt-4 py-3" id="searchBar">
-            <h6 class="mt-3 mb-0" id="searchLabel">Famous Book TiTles</h6><br/>
-            <input class="form-control mb-1" name="search" id="search" type="text" placeholder="Search for book...">
-            <ul class="d-flex justify-content-center flex-wrap align-items-center mx-auto mt-3 py-2" id="menu">
+            <h6 class="mt-3 mb-0" id="searchLabel">Famous Book Titles</h6><br/>
+            <input class="form-control mb-1" name="search" id="search" type="text" placeholder="Search for book...">   
+            <ul class="d-flex justify-content-center flex-wrap align-items-center mx-auto mt-3 py-2" id="menu">  
+            <label for="menu"> Most Searched Book Categories </label>
             {%if books|length > 0%}
                 {%for book in search_list%}
                     <li><a href="{{url_for('show_books_in_category', book_category=book.category)}}">{{ book.category}}</a></li>

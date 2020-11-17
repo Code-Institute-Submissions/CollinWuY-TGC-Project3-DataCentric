@@ -78,8 +78,31 @@
                 </div>
             </div>
             <div class="row d-flex flex-column align-items-center justify-content-center col-12 flex-nowrap m-0">
-                    <h4 class="col-7 m-2 py-2 text-center">User Ratings</h4>
-                    <p class="my-2 py-2 text-center">{{book.reviews}} stars /  5 stars</p>
+                <h4 class="col-7 m-2 py-2 text-center">User Ratings</h4>
+                <p class="text-center">
+                <div class="ratings">
+                    {%if book.reviews == 5 %}
+                        <input type="radio" name="rate" class="star" ><label class="fas fa-star fixcolor"></label>
+                        <input type="radio" name="rate" class="star" ><label class="fas fa-star fixcolor"></label>
+                        <input type="radio" name="rate" class="star" ><label class="fas fa-star fixcolor"></label>
+                        <input type="radio" name="rate" class="star" ><label class="fas fa-star fixcolor"></label>
+                        <input type="radio" name="rate" class="star" ><label class="fas fa-star fixcolor"></label>
+                    {% elif book.reviews == 4 %}
+                        <input type="radio" name="rate" class="star" ><label class="fas fa-star fixcolor"></label>
+                        <input type="radio" name="rate" class="star" ><label class="fas fa-star fixcolor"></label>
+                        <input type="radio" name="rate" class="star" ><label class="fas fa-star fixcolor"></label>
+                        <input type="radio" name="rate" class="star" ><label class="fas fa-star fixcolor"></label>
+                    {% elif book.reviews == 3 %}
+                        <input type="radio" name="rate" class="star" ><label class="fas fa-star fixcolor"></label>
+                        <input type="radio" name="rate" class="star" ><label class="fas fa-star fixcolor"></label>
+                        <input type="radio" name="rate" class="star" ><label class="fas fa-star fixcolor"></label>
+                    {% elif book.reviews == 2 %}
+                        <input type="radio" name="rate" class="star" ><label class="fas fa-star fixcolor"></label>
+                        <input type="radio" name="rate" class="star" ><label class="fas fa-star fixcolor"></label>
+                    {% elif book.reviews == 1 %}
+                        <input type="radio" name="rate" class="star" ><label class="fas fa-star fixcolor"></label>
+                    {% endif %}
+                </div></p>
             </div>
             <div class="row d-flex flex-column align-items-center justify-content-center col-12 flex-nowrap mx-0 mt-2">
                     <h4 class="col-7 my-2 py-2 text-center">Reviewer's Comments</h4>
@@ -88,7 +111,7 @@
             <div class="col-12 d-flex align-items-center justify-content-around mt-5">
                 <a href="{{url_for('show_edit_book', book_id=book._id)}}" class="btn btn-info btn-lg col-md-3 mx-2 font-weight-bolder">Edit</a>
                 <a href="{{url_for('show_delete_book', book_id=book._id)}}" class="btn btn-danger btn-lg col-md-3 mx-2 font-weight-bolder">Delete</a>
-                <a href="{{url_for('show_books_in_category', book_category=book.category)}}" class="btn btn-warning btn-lg col-md-3 mx-2 font-weight-bolder">Go to Category</a>
+                <a href="{{url_for('show_books_in_category', book_category=book.category)}}" class="btn btn-warning btn-lg col-md-3 mx-2 font-weight-bolder">More in this Category</a>
             </div>
         </div>  
     </div>

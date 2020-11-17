@@ -5,7 +5,7 @@
 {% endblock %}
 {% block content %} 
 <div class="container d-flex flex-column justify-content-center align-items-center mx-auto my-5 text-center" id="deleteTitle">  
-    <h3 style="color: red; background-color: rgba(22, 22, 29, 1);">!!! DELTELING !!!</h3>
+    <h3 style="color: red; background-color: rgba(22, 22, 29, 1);">!!! DELETING !!!</h3>
     <h2>{{book.name}}</h2>
     <h3>Review</h3>
 </div>
@@ -46,6 +46,7 @@
         <div class="d-flex align-items-center justify-content-center">
             <form method="POST">
                 <div class="alert alert-danger">
+                    <small class="text-center mb-5 mt-0" style="color: red;">Kindly Log In as ORIGINAL POSTER Before Deleting Review!</small>
                     <p> Are you SURE you want to DELETE this {{book.name}} review ? </p>
                     <div class="containter">
                         <a href="{{url_for('show_book_info', book_id=book._id)}}" class="btn btn-success">Cancel</a>

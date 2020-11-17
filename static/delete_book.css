@@ -4,7 +4,7 @@
     font-weight: bolder;
     letter-spacing: 0.25rem;
     margin: 0;
-    font-family: "Unica One", cursive;
+    font-family: 'MedievalSharp', cursive;
     color: antiquewhite;
 }
 
@@ -13,7 +13,7 @@
     font-weight: bolder;
     letter-spacing: 0.25rem;
     margin: 0;
-    font-family: "Unica One", cursive;
+    font-family: 'MedievalSharp', cursive;
     color: antiquewhite;
     border-top: 4px solid rgba(137, 169, 194, 1);
     border-bottom: 4px solid rgba(137, 169, 194, 1);
@@ -75,7 +75,7 @@
     padding: 0 0.5rem 0 0;
     flex-direction: column;
     color: rgba(137, 169, 194, 1);
-    font-family: "Unica One", cursive;
+    font-family: 'MedievalSharp', cursive;
     font-weight: bolder;
     letter-spacing: 0.25rem;
     margin: 0;
@@ -86,7 +86,7 @@
     flex: 3;
     font-size: 0.85rem;
     color: rgba(137, 169, 194, 1);
-    font-weight: bold;
+    font-weight: 300;
     letter-spacing: 0.25rem;
     margin: 0;
     font-family: "Montserrat", sans-serif;

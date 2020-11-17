@@ -10,7 +10,7 @@
     font-weight: bolder;
     letter-spacing: 0.25rem;
     margin: 0;
-    font-family: "Unica One", cursive;
+    font-family: 'MedievalSharp', cursive;
     color: antiquewhite;
     border-top: 4px solid rgba(137, 169, 194, 1);
     border-bottom: 4px solid rgba(137, 169, 194, 1);
@@ -20,7 +20,7 @@
     font-weight: bolder;
     letter-spacing: 0.25rem;
     margin: 0;
-    font-family: "Unica One", cursive;
+    font-family: 'MedievalSharp', cursive;
     color: antiquewhite;
 }
 
@@ -42,11 +42,12 @@
     font-weight: bolder;
     letter-spacing: 0.25rem;
     margin: 0;
-    font-family: "Montserrat", sans-serif;
+    font-family: 'MedievalSharp', cursive;
     flex: 1;
     text-align: center;
 }
 
+/* Rating Stars CSS */
 .ratings {
   display: flex;
   align-items: center;
@@ -79,7 +80,7 @@
     padding: 0 0.5rem 0 0;
     flex-direction: column;
     color: rgba(137, 169, 194, 1);
-    font-family: "Unica One", cursive;
+    font-family: 'MedievalSharp', cursive;
     font-weight: bolder;
     letter-spacing: 0.25rem;
     margin: 0;
@@ -90,8 +91,8 @@
     flex: 3;
     font-size: 0.75rem;
     color: rgba(137, 169, 194, 1);
-    font-weight: bold;
-    letter-spacing: 0.25rem;
+    font-weight: 300;
+    letter-spacing: 0.35rem;
     margin: 0;
     font-family: "Montserrat", sans-serif;
 }
@@ -101,7 +102,7 @@ h4 {
     font-weight: bolder;
     letter-spacing: 0.25rem;
     margin: 0;
-    font-family: "Unica One", cursive;
+    font-family: 'MedievalSharp', cursive;
     color: antiquewhite;
     border-top: 4px solid rgba(137, 169, 194, 1);
     border-bottom: 4px solid rgba(137, 169, 194, 1);
@@ -114,7 +115,7 @@ h4 {
 
 #infoBoard p {
     font-size: 0.75rem;
-    font-weight: bolder;
+    font-weight: 300;
     letter-spacing: 0.25rem;
     font-family: "Montserrat", sans-serif;
     color: rgba(137, 169, 194, 1);

@@ -3,8 +3,12 @@
 ### TGC - Data Centric Development Milestone Project 3 ###
 By: **Collin Wu Yuewei** -- *Code Institute Batch 8* -- 
 ##### Made with Python/Flask and MongoDB ######
+<br> 
 
+## SUMMARY ##
 The intent of this webpage is to be a communal forum for enthusiast to share they review on books from their favourite tabletop rpg series. Giving basic information about he books, the cost, where to get them and what to expect.
+<br>
+
 ##### Home Page Preview ####
 ![Website Preview Image](/static/images/proj3Home.png "Where to Park Website Homepage")
 ##### Book Review Info Preview ####
@@ -13,14 +17,14 @@ The intent of this webpage is to be a communal forum for enthusiast to share the
 ![Website Preview Image](/static/images/proj3Footer.png "Where to Park Website Search Page")
 
 
-## Aim ##
+## PROJECT AIM/INTENT ##
 The goal of the project is to build an data centric site with Python language with Flask framework and MongoDB to present useful information drawn from different user input via CRUD, using techonology and languages taught in the Code Institute Fullstack Web Developer Program; at Project 3, namely HTML, CSS, JS, Python, Flask, MongoDB.
 
 __The concept chosen for this project is to create a communal book review website for enthusiast to share they review on books from their favourite tabletop rpg series. To become a resource or reference for others who might want to jump into the hobby, or looking for information__ 
 
 The problem is that there are too many series of such tabletop rpgs, books are typically found at the main publisher's webpage at a mint condition price. While at amazon, you are able to obtain used copies for cheaper and a consolidated area for finding different books from different genres/series.
 
-## Demo ##
+## FULL DEMO ##
 
 The full website demo can be previewed here: [Tabletop Six Webpage](https://cwy-tgc8-project-3.herokuapp.com/)
 
@@ -29,38 +33,43 @@ Responsive is tested using [Am I Responsive?](http://ami.responsivedesign.is/?ur
 ![Responsive Demo on Various Devices](/static/images/amiresponsive.png "Website Responsiveness Preview")
 <br>
 
-## UX ##
+## UX DESIGN ##
 
-The target audience for this website are for people who are drivers that are on the move. Whom are going to packed locations such as malls, events...etc or are stuck in carpark queues.  
-
-The website concept is mainly to be a clean and simple interface, where the only actions are either text-box, icons or buttons. Removing the "barrier to learn", allowing any new user to pick-up and use immediately.
-
-This project was a mobile first and a single hand operation design in mind. It has to fill the screen and have sufficiently large fonts for pleasant viewing and accessiblity. A big striking blue Call-To-Action button right in the middle of the screen that accesses the GPS capability of modern day high-tech phones. Allowing pin-point accuracy to the current location.
-
-Obvious blue car icons are dotted on the map as locations of carparks in the zone and have pop-ups to give essential information to the user. The available carpark is the largest of the information and is color coded depending of the current availability parking slots in relations to the total slots available at the carpark.
-
-By hiding pages and only display the relevant page at 100% viewport, no scrolling is required to gain full access to information.
-
-A secondary text-box search is located below the Call-To-Action button on the homepage and top-left beside the return to homepage icon on the map page to allow destination planning, re-locating the center of scanning or when GPS locator is unavailable.
-
-On larger devices, more fanciful click-to-expand location summary table is available to view all locations in the zone and their available carpark slots at a go.
-<br>
-![Information Summary Table](assets/images/summarytable.png "Information Summary Table")
+- Firstly the design is fully mobile responsive, navbar to collapsed hamburgers and book cards wrap to make 3 -> 2 -> 1 card per screen depending on size.
+    <br>
+- The layout is mainly designed for desktop users or large tablet users. There is a persistent sticky nav bar at the top as well as a persistent search banner thorughout each page for easy access.
+    <br>
+- The navbar has hover over indicators as well as a dropdown list for the categories available. It also changes the "Log In" to the user's name when logged in. 
+    <br>
+- The search bar have preset categories that are clickable (with hover color change effects) which redirects the user to the category page which shows all book reviews within it. The search bar itself when search takes the first keyword and finds the books relating to the search. You can try this by searching "Star" then completing it to "Starfinder".
+    <br>
+- All book review cards are linked to their own book review information page and can be clicked for quick information access
+    <br>
+- Buttons of Submit/Edit/Delete/Go to Category are all color coded and large for easy clicking
+    <br>
+- The footer is also persistent for a more holistic view as well as a call-to-action for users to donate to the site owners
+    <br>
+- User log in system is used to monitor new post, edits and deletes. This is to prevent other people removing valuable reviews. With that being said, there is a Adminstrative account that can access any review, edit or delete. In an event an user wants to edit a review that was not posted by them, they are redirected to the log in page. IF they want to edit the review, they would need to approach the adminstrator. 
+- ##### Adminstrative Account <br>User Email:   __Admin__ <br> Password: __Admin__ <br> ######
+    <br>
+- All user action to interact with the server, have color coded flash messages on success or errors
+    <br>
+- Forms are all validated and would not allow blank entries, if left empty will present a red outline and a small text suggesting the input. There are also quick look up for categories/series to post new reviews in.
+    <br>
 
 ## Features ##
-- Full 100% Viewport per page to focus the user's attention
-  <br>
-- Single Website, All Pages Design for minimal loading of links or other pages 
-  <br>
-- 3-5sec Loading Page for allowing all API data retrievial to be completed preventing interruptions on usage
-  <br>
-- Loading page will store a reload value into localstorage, that then stops the refreshing webpage of setTimout on the second load 
-  <br>
-- Combining data from different API into a JSON, allowing data from multiple sources with a linking value
-- <br>
+- MongoDB Supported Webpage with Databases Collection Interactions
+    - Card Display of Book Reviews (Governed by User Login Unique ID)
+    - Communal - Free Forum (Anyone can make an Account)
+    <br>
+- Quick access Search Function with keyword search, as well as quick category access buttons to see book reviews
+    - Sorted Reviews to their respective Series
+    <br>
+- Promotes users to post reviews by encouraging affiliate links in the review to Amazon
+    <br>
 - Quick Access Call-to-Action button that use GPS/Geolocation to determine location
-  <br>
-- Color-coded information for better UX
+    <br>
+- Color-coded buttons and flashed messages for better UX
   <br>
 - Loading Page (_Page0_)
   - Animated circle movements to indicate loading of the webpage and intuitively let the user know to let it load for a few seconds

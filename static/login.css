@@ -5,7 +5,7 @@
     font-weight: bolder;
     letter-spacing: 0.25rem;
     margin: 0;
-    font-family: "Unica One", cursive;
+    font-family: 'MedievalSharp', cursive;
     border-top: 4px solid rgba(137, 169, 194, 1);
     border-bottom: 4px solid rgba(137, 169, 194, 1);
 }
@@ -23,7 +23,7 @@ label{
     color: antiquewhite;
     font-weight: bolder;
     letter-spacing: 0.25rem;
-    font-family: "Unica One", cursive;
+    font-family: 'MedievalSharp', cursive;
 }
 
 .form-group {
@@ -32,7 +32,7 @@ label{
 
 small {
   color: antiquewhite;
-  font-weight: bolder;
+  font-weight: 300;
   letter-spacing: 0.25rem;
   margin: 0;
   font-family: "Unica One", cursive;

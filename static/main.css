@@ -117,9 +117,10 @@ nav {
     z-index: 1;
     width: 100%;
     padding-left: 2rem;
+    margin: 0;
 }
 
-#menu li {
+#menu ul li {
   width: auto;
   text-align: center;
   background-color: rgba(137, 169, 194, 1);
@@ -131,19 +132,20 @@ nav {
   letter-spacing: 0.2rem;
   font-weight: 600;
   margin: 1rem 1rem;
+  text-decoration: none;
+  list-style: none;
 }
 
-#menu li a {
-    text-decoration: none;
+#menu ul li a{
     color:  rgba(22, 22, 29, 1);
 }
 
-#menu li:hover{
+#menu ul li:hover{
     color:antiquewhite;
     background-color: rgba(22, 22, 29, 1); 
 }
 
-#menu li:hover a{
+#menu ul li:hover a{
     color:antiquewhite;
     background-color: rgba(22, 22, 29, 1); 
 }

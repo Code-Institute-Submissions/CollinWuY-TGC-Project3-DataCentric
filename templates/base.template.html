@@ -52,14 +52,16 @@
         <div class="container mt-4 py-3" id="searchBar">
             <h6 class="mt-3 mb-0" id="searchLabel">Famous Book Titles</h6><br/>
             <input class="form-control mb-1" name="search" id="search" type="text" placeholder="Search for book...">   
-            <ul class="d-flex justify-content-center flex-wrap align-items-center mx-auto mt-3 py-2" id="menu">  
-            <p id="searchSubText"> Most Searched Book Categories </p>
-            {%if books|length > 0%}
-                {%for book in search_list%}
-                    <li><a href="{{url_for('show_books_in_category', book_category=book.category)}}">{{ book.category}}</a></li>
-                {% endfor %}
-            </ul>
+            <div id="menu">
+                <p class="pt-3" id="searchSubText"> Most Searched Book Categories </p>
+                <ul class="d-flex flex-wrap justify-content-center align-items-center mx-auto my-0 pl-0 pb-2" >  
+                {%if books|length > 0%}
+                    {%for book in search_list%}
+                        <li><a href="{{url_for('show_books_in_category', book_category=book.category)}}">{{ book.category}}</a></li>
+                    {% endfor %}
+                </ul>
             {% endif %}
+            </div>
         </div>
     </section>
 

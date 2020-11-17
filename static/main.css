@@ -1,3 +1,4 @@
+/* General CSS */
 html {
     font-size: 15px;
 }
@@ -11,8 +12,9 @@ body {
   background-position: center;
   background-size: cover;
 }
-/* Logo Color: rgba(137,169,194,1); */
-/* Contrast Font Color: rgba(22, 22, 29, 0.7); */
+
+
+/* Nav Bar CSS */
 nav {
   background-color: rgba(22, 22, 29, 0.9);
   width: 100%;
@@ -62,6 +64,7 @@ nav {
   height: 6rem;
 }
 
+/* Search Bar CSS */
 #searchWrapper {
   background-repeat: none;
   background-size: cover;
@@ -82,7 +85,7 @@ nav {
   box-shadow: 2px 6px 8px  rgba(22, 22, 29, 1);
 }
 
-#searchLabel {
+#searchLabel h6{
   font-size: 0.8rem;
   color: antiquewhite;
   font-weight: bolder;
@@ -130,6 +133,7 @@ nav {
     background-color: rgba(22, 22, 29, 1); 
 }
 
+/* Page Footer CSS */
 footer {
     width: auto;
     height: auto;

@@ -10,7 +10,7 @@
 <div class="container d-flex flex-row justify-content-between my-5 flex-wrap">
     {%if books|length > 0%}
         {%for book in top %}
-            <div class="card flex-shrink-0 m-3" style="width: 18rem;">
+            <div class="card flex-shrink-0 m-3" id="bookCard">
                 <a href="{{url_for('show_book_info', book_id=book._id)}}"><img class="card-img-top" src="{{book.image}}" style="height: 400px;" alt="Card image cap"></a>
                 <div class="card-body">
                     <h5 class="card-title">{{book.name}}</h5>

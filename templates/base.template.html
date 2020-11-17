@@ -25,8 +25,8 @@
 <body>
 <!-- Nav Bar -->
     <header class="container-fluid">
-        <nav class="navbar navbar-dark fixed-top navbar-expand-lg px-5 pt-1 pb-2" id="navbar" role="navigatation">
-            <a class="navbar-brand" href="{{url_for('homepage')}}"><img src="{{url_for('static', filename='/images/TabletopLogo.png')}}" id="logo"></a>
+        <nav class="navbar navbar-dark fixed-top navbar-expand-lg px-5 pt-1 pb-2" id="navbar" role="navigation">
+            <a class="navbar-brand" href="{{url_for('homepage')}}"><img src="{{url_for('static', filename='/images/TabletopLogo.png')}}" alt="Tabletop Logo" id="logo"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCustom" aria-controls="navbarCustom" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -54,7 +54,7 @@
             <ul class="d-flex justify-content-center flex-wrap align-items-center mx-auto mt-3 py-2" id="menu">
             {%if books|length > 0%}
                 {%for book in search_list%}
-                    <a href="{{url_for('show_books_in_category', book_category=book.category)}}"><li>{{ book.category}}</li></a>
+                    <li><a href="{{url_for('show_books_in_category', book_category=book.category)}}">{{ book.category}}</a></li>
                 {% endfor %}
             </ul>
             {% endif %}
@@ -71,20 +71,20 @@
         <div class="container d-flex flex-row align-items-center justify-content-center flex-wrap" id="footerWrapper">
             <div class="container d-flex flex-column m-0 flex-shrink-0" id="footer-logo">
                 <div class="mx-auto mt-3">
-                    <a href="{{url_for('homepage')}}"><img src="{{url_for('static', filename='/images/TabletopLogo.png')}}" id="footerLogo"></a>
+                    <a href="{{url_for('homepage')}}"><img src="{{url_for('static', filename='/images/TabletopLogo.png')}}" alt="Tabletop Logo" id="footerLogo"></a>
                 </div>
                 <div class="d-flex flex-row justify-content-between my-3 mx-auto" id="social">
                     <div class="mx-1">
-                        <a href="https://discord.com/"><img src="{{url_for('static', filename='/images/discordicon.png')}}"></a>
+                        <a href="https://discord.com/"><img src="{{url_for('static', filename='/images/discordicon.png')}}" alt="Discord Icon"></a>
                     </div>
                      <div class="mx-1">
-                        <a href="https://twitter.com/?lang=en"><img src="{{url_for('static', filename='/images/twittericon.png')}}"></a>
+                        <a href="https://twitter.com/?lang=en"><img src="{{url_for('static', filename='/images/twittericon.png')}}" alt="Twitter Icon"></a>
                     </div>
                      <div class="mx-1">
-                        <a href="https://www.instagram.com/"><img src="{{url_for('static', filename='/images/instagramicon.png')}}"></a>
+                        <a href="https://www.instagram.com/"><img src="{{url_for('static', filename='/images/instagramicon.png')}}" alt="Instagram Icon"></a>
                     </div>
                      <div class="mx-1">
-                        <a href="https://www.facebook.com"><img src="{{url_for('static', filename='/images/facebookicon.png')}}"></a>
+                        <a href="https://www.facebook.com"><img src="{{url_for('static', filename='/images/facebookicon.png')}}" alt="Facebook Icon"></a>
                     </div>
                 </div>
                 <div id="footerAddress" class="d-flex text-center pt-2 flex-shrink-0">
@@ -113,7 +113,7 @@
                     <p>This site requires constant updating and maintenance. If this webpage has helped you, do kindly consider donating to our Patreon!</p>
                 </div>
                 <div class="mb-3">
-                    <a href="https://www.patreon.com/"><img src="{{url_for('static', filename='/images/patreon-banner.png')}}"></a>
+                    <a href="https://www.patreon.com/"><img src="{{url_for('static', filename='/images/patreon-banner.png')}}" alt="Patreon Banner"></a>
                 </div>                                
             </div>
         </div>
@@ -126,7 +126,7 @@
 <!-- Toastr JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <!-- Base Templates AJAX Calls Javascript -->
-    <script type="text/javascript" src="{{ url_for('static', filename='/js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='/js/main.js') }}"></script>
     
 <!-- Toastr Flash Messages Script-->
     <script>

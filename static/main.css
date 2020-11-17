@@ -115,11 +115,17 @@ nav {
   margin: 1rem 1rem;
 }
 
-#menu a {
+#menu li a {
     text-decoration: none;
+    color:  rgba(22, 22, 29, 1);
 }
 
-#menu a li:hover {
+#menu li:hover{
+    color:antiquewhite;
+    background-color: rgba(22, 22, 29, 1); 
+}
+
+#menu li:hover a{
     color:antiquewhite;
     background-color: rgba(22, 22, 29, 1); 
 }

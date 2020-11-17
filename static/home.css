@@ -60,14 +60,14 @@
   color: antiquewhite;
   padding: 0.2rem;
   position: relative;
-  transition: all 0.2 ease-in;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-in-out;
   text-shadow: 0 3px 6px darkgrey;
 }
 
 .rating-score{
     text-align: center;
     font-size: 0.75rem;
-    align-self: top;
     padding: 0 0.5rem 0 0;
     flex-direction: column;
     color: rgba(137, 169, 194, 1);
